@@ -11,7 +11,7 @@ export default function SelectedProjects() {
                 {/* Decorative Corner Borders (CSS or SVG later) */}
 
                 <h2 className="font-display text-4xl md:text-5xl text-center mb-12 uppercase tracking-wide">
-                    Selected Projects
+                    Projects
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
     return (
@@ -18,7 +19,7 @@ export default function Hero() {
             {/* Bottom Half - Lower Texture Background */}
             <div className="absolute bottom-0 left-0 w-full h-1/2 z-0">
                 <Image
-                    src="/images/lower.jpg"
+                    src="/images/upper.jpg"
                     alt="Lower Texture Background"
                     fill
                     className="object-cover"
@@ -27,40 +28,61 @@ export default function Hero() {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 flex-grow max-w-7xl mx-auto w-full px-4 grid grid-cols-1 md:grid-cols-12 h-screen">
+            <div className="relative z-10 flex-grow max-w-7xl mx-auto w-full px-4 h-screen">
 
-                {/* Image Section - Overlapping Split */}
-                <div className="md:col-span-5 flex items-end justify-center md:justify-start h-full pb-0 md:pb-0 order-2 md:order-1 relative">
-                    <div className="relative w-[400px] h-[500px] md:w-[800px] md:h-[1000px] z-20 translate-y-[10%] md:translate-y-[15%]">
-                        <div className="relative w-full h-full rounded-t-full md:rounded-none overflow-hidden shadow-2xl border-4 border-brand-black md:border-none">
-                            <Image
-                                src="/images/profile.png"
-                                alt="Jean Pascal Cyusa Shyaka"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
+                {/* Profile Image - Centered on Split Line */}
+                <div className="absolute top-1/2 left-4 md:left-12 -translate-y-1/2 z-20">
+                    <div className="relative w-[300px] h-[400px] md:w-[500px] md:h-[700px]">
+                        <div className="relative w-full h-full rounded-t-full md:rounded-none overflow-hidden shadow-2xl border-4 border-brand-black md:border-none flex items-center justify-center">
+                            <div className="relative w-full h-full md:w-[90%] md:h-[90%]">
+                                <Image
+                                    src="/images/profile.jpg"
+                                    alt="Jean Pascal Cyusa Shyaka"
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                />
+                            </div>
+                            {/* Frame Overlay */}
+                            <div className="absolute inset-0 z-30 pointer-events-none hidden md:block">
+                                <Image
+                                    src="/images/artefacts/10.png"
+                                    alt="Frame"
+                                    fill
+                                    className="object-fill"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Typography Section - Top Half */}
-                <div className="md:col-span-7 flex flex-col justify-center md:justify-start pt-32 md:pt-40 text-center md:text-right order-1 md:order-2">
-                    <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.8] uppercase text-brand-white mb-6">
-                        Mechanical
+                {/* Text Content - Top Half */}
+                <div className="absolute top-0 right-4 md:right-12 w-full md:w-1/2 h-1/2 flex flex-col justify-center items-end text-right z-30 pt-20">
+                    <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-brand-white mb-2 tracking-tighter">
+                        MECHANICAL
                         <br />
-                        <span className="text-brand-white">Engineer.</span>
+                        <span className="text-brand-orange">ENGINEER.</span>
                     </h1>
+                    <div className="flex flex-col items-end gap-1 mb-6">
+                        <h2 className="font-sans text-xl md:text-2xl text-gray-300 tracking-widest uppercase">
+                            Jean Pascal
+                        </h2>
+                        <h2 className="font-sans text-xl md:text-2xl text-brand-white font-bold tracking-widest uppercase">
+                            Cyusa Shyaka
+                        </h2>
+                    </div>
 
-                    <h2 className="font-display text-xl md:text-3xl tracking-widest uppercase text-brand-white mb-2">
-                        Designer. Researcher.
-                    </h2>
-
-                    <Link href="/resume" className="group inline-block">
-                        <p className="font-sans text-lg md:text-xl text-brand-orange uppercase group-hover:text-brand-white transition-colors">
-                            Graduating 2026
-                        </p>
-                    </Link>
+                    <div className="flex items-center gap-6">
+                        <Link
+                            href="/resume"
+                            className="group flex items-center gap-2 text-brand-white hover:text-brand-orange transition-colors"
+                        >
+                            <span className="font-sans text-sm tracking-widest uppercase border-b border-brand-orange pb-1">
+                                Graduating May 2025
+                            </span>
+                            <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>

@@ -3,46 +3,64 @@ import Link from "next/link";
 
 export default function Hero() {
     return (
-        <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-brand-black text-brand-white p-4">
-            {/* Background Pattern Placeholder - Spiral */}
-            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none flex items-center justify-center">
-                {/* Simple CSS radial repeating gradient to mimic spiral/circles for now */}
-                <div
-                    className="w-[200vw] h-[200vw] rounded-full"
-                    style={{
-                        background:
-                            "repeating-radial-gradient(circle, var(--color-brand-orange), var(--color-brand-orange) 20px, transparent 20px, transparent 40px)",
-                    }}
+        <section className="relative min-h-screen flex flex-col bg-brand-black overflow-hidden">
+            {/* Top Half - Black Texture Background */}
+            <div className="absolute top-0 left-0 w-full h-1/2 z-0">
+                <Image
+                    src="/images/black-texture-background.jpg"
+                    alt="Black Texture Background"
+                    fill
+                    className="object-cover opacity-90"
+                    priority
                 />
             </div>
 
-            <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                {/* Left: Image Placeholder */}
-                <div className="order-2 md:order-1 flex justify-center md:justify-start">
-                    <div className="relative w-64 h-80 md:w-80 md:h-96 bg-gray-800 rounded-lg overflow-hidden border-4 border-brand-orange">
-                        {/* Placeholder for Engineer Image */}
-                        <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                            [Engineer Image]
+            {/* Bottom Half - Spiral Pattern */}
+            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-brand-orange z-0 overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                    <div
+                        className="w-[200vw] h-[200vw] rounded-full"
+                        style={{
+                            background:
+                                "repeating-radial-gradient(circle, var(--color-brand-black), var(--color-brand-black) 30px, transparent 30px, transparent 60px)",
+                        }}
+                    />
+                </div>
+            </div>
+
+            {/* Content Container */}
+            <div className="relative z-10 flex-grow max-w-7xl mx-auto w-full px-4 grid grid-cols-1 md:grid-cols-12 h-screen">
+
+                {/* Image Section - Overlapping Split */}
+                <div className="md:col-span-5 flex items-end justify-center md:justify-start h-full pb-0 md:pb-0 order-2 md:order-1 relative">
+                    <div className="relative w-[400px] h-[500px] md:w-[800px] md:h-[1000px] z-20 translate-y-[10%] md:translate-y-[15%]">
+                        <div className="relative w-full h-full rounded-t-full md:rounded-none overflow-hidden shadow-2xl border-4 border-brand-black md:border-none">
+                            <Image
+                                src="/images/profile.png"
+                                alt="Jean Pascal Cyusa Shyaka"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
                         </div>
                     </div>
                 </div>
 
-                {/* Right: Text Content */}
-                <div className="order-1 md:order-2 text-center md:text-right flex flex-col items-center md:items-end">
-                    <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-none uppercase text-brand-white mb-4">
-                        Jean Pascal
+                {/* Typography Section - Top Half */}
+                <div className="md:col-span-7 flex flex-col justify-center md:justify-start pt-32 md:pt-40 text-center md:text-right order-1 md:order-2">
+                    <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.8] uppercase text-brand-white mb-6">
+                        Mechanical
                         <br />
-                        <span className="text-brand-white">Cyusa Shyaka.</span>
+                        <span className="text-brand-white">Engineer.</span>
                     </h1>
-                    <h2 className="font-sans text-xl md:text-2xl tracking-widest uppercase mb-4 text-brand-white">
-                        Mechanical Engineer. Designer. Researcher.
+
+                    <h2 className="font-display text-xl md:text-3xl tracking-widest uppercase text-brand-white mb-2">
+                        Designer. Researcher.
                     </h2>
-                    <p className="font-sans text-base md:text-lg text-gray-400 max-w-md md:ml-auto mb-6">
-                        Rising junior at Tufts University majoring in Mechanical Engineering with a minor in Computer Science. Passionate about robotics, MEMS devices, and web applications.
-                    </p>
-                    <Link href="/resume" className="group">
-                        <p className="font-sans text-lg text-brand-orange uppercase group-hover:text-brand-white transition-colors">
-                            Graduating 2026 <span className="ml-2">→</span>
+
+                    <Link href="/resume" className="group inline-block">
+                        <p className="font-sans text-lg md:text-xl text-brand-orange uppercase group-hover:text-brand-white transition-colors">
+                            Graduating 2026
                         </p>
                     </Link>
                 </div>

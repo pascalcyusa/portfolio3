@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Skills() {
     const skills = ["CAD", "FEA", "MATLAB", "PYTHON", "WEB DEV"];
 
@@ -11,10 +13,17 @@ export default function Skills() {
                 <div className="flex flex-wrap justify-center gap-8 md:gap-16">
                     {skills.map((skill, index) => (
                         <div key={index} className="flex flex-col items-center">
-                            {/* Circular Badge */}
-                            <div className="w-32 h-32 rounded-full border-4 border-brand-orange flex items-center justify-center mb-4 relative">
-                                <div className="absolute inset-1 rounded-full border-2 border-brand-white border-dashed animate-spin-slow" />
-                                <span className="font-bold font-sans text-lg tracking-wider">
+                            {/* Circular Badge with Pattern */}
+                            <div className="w-40 h-40 relative flex items-center justify-center mb-4">
+                                <div className="absolute inset-0">
+                                    <Image
+                                        src={index % 2 === 0 ? "/images/artefacts/5.png" : "/images/artefacts/6.png"}
+                                        alt="Skill Pattern"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                                <span className="relative z-10 font-bold font-display text-xl tracking-wider text-brand-white">
                                     {skill}
                                 </span>
                             </div>

@@ -16,19 +16,27 @@ export default function SelectedProjects() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {featuredProjects.map((project, index) => (
-                        <div key={index} className="flex flex-col group cursor-pointer">
-                            {/* Frame Style Border */}
-                            <div className="border-2 border-brand-white p-2 mb-4 transition-transform group-hover:scale-105">
-                                <div className="border-2 border-brand-orange p-1">
-                                    <div className="bg-gray-800 h-48 w-full relative overflow-hidden">
-                                        {/* Use Next.js Image with fill for responsiveness */}
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
+                        <div key={index} className="flex flex-col group cursor-pointer items-center">
+                            {/* Frame Style Border with Pattern */}
+                            <div className="relative w-full aspect-[4/3] mb-4 p-6 flex items-center justify-center">
+                                {/* Frame Background */}
+                                <div className="absolute inset-0 z-0">
+                                    <Image
+                                        src="/images/artefacts/10.png"
+                                        alt="Project Frame"
+                                        fill
+                                        className="object-fill"
+                                    />
+                                </div>
+
+                                {/* Project Image */}
+                                <div className="relative w-[85%] h-[80%] z-10 overflow-hidden bg-gray-800">
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
                                 </div>
                             </div>
 

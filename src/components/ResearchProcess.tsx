@@ -15,13 +15,27 @@ export default function ResearchProcess() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {featuredResearch.map((item, index) => (
                         <div key={index} className="flex flex-col items-center text-center">
-                            <div className="w-full h-48 border-4 border-brand-orange mb-4 relative overflow-hidden">
-                                <Image
-                                    src={item.image}
-                                    alt={item.title}
-                                    fill
-                                    className="object-cover"
-                                />
+                            {/* Frame Style Border with Pattern */}
+                            <div className="relative w-full aspect-[4/3] mb-4 p-6 flex items-center justify-center">
+                                {/* Frame Background */}
+                                <div className="absolute inset-0 z-0">
+                                    <Image
+                                        src="/images/artefacts/10.png"
+                                        alt="Research Frame"
+                                        fill
+                                        className="object-fill"
+                                    />
+                                </div>
+
+                                {/* Research Image */}
+                                <div className="relative w-[85%] h-[80%] z-10 overflow-hidden bg-gray-800">
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        fill
+                                        className="object-cover transition-transform duration-500 hover:scale-110"
+                                    />
+                                </div>
                             </div>
                             <h3 className="font-sans font-bold text-lg uppercase mb-2">{item.title}</h3>
                             <p className="font-sans text-xs md:text-sm text-gray-400 line-clamp-3">

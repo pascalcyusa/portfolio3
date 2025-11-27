@@ -1,5 +1,5 @@
 export default function Skills() {
-    const skills = ["CAD", "FEA", "MATLAB", "PYTHON"];
+    const skills = ["CAD", "FEA", "MATLAB", "PYTHON", "WEB DEV"];
 
     return (
         <section className="py-20 bg-brand-black text-brand-white px-4">

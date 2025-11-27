@@ -1,25 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const projects = [
-    {
-        title: "Hybrid Drive Train",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: "/placeholder-project.jpg", // Placeholder
-    },
-    {
-        title: "Fluid Dynamics Lab",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: "/placeholder-project.jpg", // Placeholder
-    },
-    {
-        title: "Thermal Battery Optimization",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: "/placeholder-project.jpg", // Placeholder
-    },
-];
+import { projects } from "@/data/projects";
 
 export default function SelectedProjects() {
+    const featuredProjects = projects.slice(0, 3);
+
     return (
         <section className="py-20 bg-brand-black text-brand-white px-4">
             <div className="max-w-6xl mx-auto border-4 border-brand-orange p-8 relative">
@@ -30,13 +15,19 @@ export default function SelectedProjects() {
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
+                    {featuredProjects.map((project, index) => (
                         <div key={index} className="flex flex-col group cursor-pointer">
                             {/* Frame Style Border */}
                             <div className="border-2 border-brand-white p-2 mb-4 transition-transform group-hover:scale-105">
                                 <div className="border-2 border-brand-orange p-1">
-                                    <div className="bg-gray-800 h-48 w-full flex items-center justify-center text-gray-500">
-                                        [Project Image]
+                                    <div className="bg-gray-800 h-48 w-full relative overflow-hidden">
+                                        {/* Use Next.js Image with fill for responsiveness */}
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            fill
+                                            className="object-cover"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +35,7 @@ export default function SelectedProjects() {
                             <h3 className="font-sans font-bold text-xl uppercase mb-2 text-brand-white">
                                 {project.title}
                             </h3>
-                            <p className="font-sans text-sm text-gray-400">
+                            <p className="font-sans text-sm text-gray-400 line-clamp-3">
                                 {project.description}
                             </p>
                         </div>

@@ -18,18 +18,21 @@ export default function Footer() {
                 </div>
 
                 <div className="flex gap-6">
-                    {/* Social Icons Placeholders */}
-                    <div className="w-8 h-8 bg-brand-black rounded-full flex items-center justify-center text-xs">
-                        WA
-                    </div>
-                    <div className="w-8 h-8 bg-brand-black rounded-full flex items-center justify-center text-xs">
-                        FB
-                    </div>
-                    <div className="w-8 h-8 bg-brand-black rounded-full flex items-center justify-center text-xs">
-                        IG
-                    </div>
+                    <a href="mailto:cyusashyakapascal@gmail.com" className="w-10 h-10 bg-brand-black rounded-full flex items-center justify-center text-xs hover:bg-brand-white hover:text-brand-black transition-colors">
+                        Mail
+                    </a>
+                    <a href="https://linkedin.com/in/pascal-cyusa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-brand-black rounded-full flex items-center justify-center text-xs hover:bg-brand-white hover:text-brand-black transition-colors">
+                        IN
+                    </a>
+                    <a href="https://github.com/pascalcyusa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-brand-black rounded-full flex items-center justify-center text-xs hover:bg-brand-white hover:text-brand-black transition-colors">
+                        GH
+                    </a>
                 </div>
+            </div>
+            <div className="text-center mt-8 text-xs opacity-70 font-sans">
+                &copy; {new Date().getFullYear()} Jean Pascal Cyusa Shyaka. All rights reserved.
             </div>
         </footer>
     );
 }
+

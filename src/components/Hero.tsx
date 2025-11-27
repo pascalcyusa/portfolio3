@@ -29,17 +29,20 @@ export default function Hero() {
 
                 {/* Right: Text Content */}
                 <div className="order-1 md:order-2 text-center md:text-right flex flex-col items-center md:items-end">
-                    <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-none uppercase text-brand-white mb-4">
-                        Mechanical
+                    <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-none uppercase text-brand-white mb-4">
+                        Jean Pascal
                         <br />
-                        <span className="text-brand-white">Engineer.</span>
+                        <span className="text-brand-white">Cyusa Shyaka.</span>
                     </h1>
-                    <h2 className="font-sans text-xl md:text-2xl tracking-widest uppercase mb-2 text-brand-white">
-                        Designer. Researcher.
+                    <h2 className="font-sans text-xl md:text-2xl tracking-widest uppercase mb-4 text-brand-white">
+                        Mechanical Engineer. Designer. Researcher.
                     </h2>
+                    <p className="font-sans text-base md:text-lg text-gray-400 max-w-md md:ml-auto mb-6">
+                        Rising junior at Tufts University majoring in Mechanical Engineering with a minor in Computer Science. Passionate about robotics, MEMS devices, and web applications.
+                    </p>
                     <Link href="/resume" className="group">
                         <p className="font-sans text-lg text-brand-orange uppercase group-hover:text-brand-white transition-colors">
-                            Graduating [Year] <span className="ml-2">→</span>
+                            Graduating 2026 <span className="ml-2">→</span>
                         </p>
                     </Link>
                 </div>
@@ -47,4 +50,3 @@ export default function Hero() {
         </section>
     );
 }
-

@@ -1,14 +1,14 @@
 "use client";
 
+import { Suspense, useState, useEffect } from "react";
 import Image from "next/image";
 import { projects, Project } from "@/data/projects";
-import { useState, useEffect } from "react";
 import ProjectModal from "@/components/ProjectModal";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
-export default function ProjectsPage() {
+function ProjectsContent() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const searchParams = useSearchParams();
@@ -119,5 +119,13 @@ export default function ProjectsPage() {
                 />
             )}
         </main>
+    );
+}
+
+export default function ProjectsPage() {
+    return (
+        <Suspense fallback={<div className="bg-brand-black min-h-screen text-brand-white p-8 pt-24">Loading...</div>}>
+            <ProjectsContent />
+        </Suspense>
     );
 }

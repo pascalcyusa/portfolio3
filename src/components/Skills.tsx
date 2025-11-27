@@ -12,9 +12,9 @@ export default function Skills() {
 
                 <div className="flex flex-wrap justify-center gap-8 md:gap-16">
                     {skills.map((skill, index) => (
-                        <div key={index} className="flex flex-col items-center">
+                        <div key={index} className="flex flex-col items-center group cursor-pointer">
                             {/* Circular Badge with Pattern */}
-                            <div className="w-40 h-40 relative flex items-center justify-center mb-4">
+                            <div className="w-40 h-40 relative flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
                                 <div className="absolute inset-0">
                                     <Image
                                         src={index % 2 === 0 ? "/images/artefacts/5.png" : "/images/artefacts/6.png"}

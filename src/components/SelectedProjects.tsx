@@ -7,7 +7,7 @@ export default function SelectedProjects() {
 
     return (
         <section className="py-20 bg-brand-black text-brand-white px-4">
-            <div className="max-w-6xl mx-auto border-4 border-brand-orange p-8 relative">
+            <div className="max-w-6xl mx-auto p-8 relative">
                 {/* Decorative Corner Borders (CSS or SVG later) */}
 
                 <h2 className="font-display text-4xl md:text-5xl text-center mb-12 uppercase tracking-wide">
@@ -17,28 +17,30 @@ export default function SelectedProjects() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {featuredProjects.map((project, index) => (
                         <div key={index} className="flex flex-col group cursor-pointer items-center">
-                            {/* Frame Style Border with Pattern */}
-                            <div className="relative w-full aspect-[4/3] mb-4 p-6 flex items-center justify-center">
-                                {/* Frame Background */}
-                                <div className="absolute inset-0 z-0">
-                                    <Image
-                                        src="/images/artefacts/10.png"
-                                        alt="Project Frame"
-                                        fill
-                                        className="object-fill"
-                                    />
-                                </div>
+                            <Link href={`/projects?project=${project.id}`} className="w-full">
+                                {/* Frame Style Border with Pattern */}
+                                <div className="relative w-full aspect-[4/3] mb-4 p-6 flex items-center justify-center">
+                                    {/* Frame Background */}
+                                    <div className="absolute inset-0 z-0">
+                                        <Image
+                                            src="/images/artefacts/10.png"
+                                            alt="Project Frame"
+                                            fill
+                                            className="object-fill"
+                                        />
+                                    </div>
 
-                                {/* Project Image */}
-                                <div className="relative w-[85%] h-[80%] z-10 overflow-hidden bg-gray-800">
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
+                                    {/* Project Image */}
+                                    <div className="relative w-[85%] h-[80%] z-10 overflow-hidden bg-gray-800">
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            fill
+                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
 
                             <h3 className="font-sans font-bold text-xl uppercase mb-2 text-brand-white">
                                 {project.title}

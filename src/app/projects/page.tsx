@@ -2,14 +2,27 @@
 
 import Image from "next/image";
 import { projects, Project } from "@/data/projects";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProjectModal from "@/components/ProjectModal";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 export default function ProjectsPage() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const searchParams = useSearchParams();
+
+    // Handle deep linking via query param
+    useEffect(() => {
+        const projectId = searchParams.get("project");
+        if (projectId) {
+            const project = projects.find((p) => p.id === projectId);
+            if (project) {
+                setSelectedProject(project);
+            }
+        }
+    }, [searchParams]);
 
     // Get unique categories
     const categories = Array.from(new Set(projects.map((p) => p.category)));

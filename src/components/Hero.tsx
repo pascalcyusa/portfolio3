@@ -4,28 +4,26 @@ import Link from "next/link";
 export default function Hero() {
     return (
         <section className="relative min-h-screen flex flex-col bg-brand-black overflow-hidden">
-            {/* Top Half - Black Texture Background */}
+            {/* Top Half - Upper Texture Background */}
             <div className="absolute top-0 left-0 w-full h-1/2 z-0">
                 <Image
-                    src="/images/black-texture-background.jpg"
-                    alt="Black Texture Background"
+                    src="/images/upper.jpg"
+                    alt="Upper Texture Background"
                     fill
-                    className="object-cover opacity-90"
+                    className="object-cover"
                     priority
                 />
             </div>
 
-            {/* Bottom Half - Spiral Pattern */}
-            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-brand-orange z-0 overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                    <div
-                        className="w-[200vw] h-[200vw] rounded-full"
-                        style={{
-                            background:
-                                "repeating-radial-gradient(circle, var(--color-brand-black), var(--color-brand-black) 30px, transparent 30px, transparent 60px)",
-                        }}
-                    />
-                </div>
+            {/* Bottom Half - Lower Texture Background */}
+            <div className="absolute bottom-0 left-0 w-full h-1/2 z-0">
+                <Image
+                    src="/images/lower.jpg"
+                    alt="Lower Texture Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
             </div>
 
             {/* Content Container */}

@@ -78,7 +78,7 @@ export default function Hero() {
                             className="group flex items-center gap-2 text-brand-white hover:text-brand-orange transition-colors"
                         >
                             <span className="font-sans text-sm tracking-widest uppercase border-b border-brand-orange pb-1">
-                                Graduating May 2025
+                                MY RESUME
                             </span>
                             <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
                         </Link>

@@ -30,7 +30,7 @@ export default function Footer() {
                     </a>
                 </div>
             </div>
-            <div className="text-center mt-8 text-xs opacity-70 font-sans">
+            <div className="text-center mt-8 text-xs font-sans">
                 &copy; {new Date().getFullYear()} Jean Pascal Cyusa Shyaka. All rights reserved.
             </div>
         </footer>

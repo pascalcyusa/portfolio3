@@ -8,7 +8,7 @@ export default function Hero() {
             {/* Top Half - Upper Texture Background */}
             <div className="absolute top-0 left-0 w-full h-1/2 z-0">
                 <Image
-                    src="/images/upper.jpg"
+                    src="/images/pascal-lab-2.png"
                     alt="Upper Texture Background"
                     fill
                     className="object-cover"
@@ -19,7 +19,7 @@ export default function Hero() {
             {/* Bottom Half - Lower Texture Background */}
             <div className="absolute bottom-0 left-0 w-full h-1/2 z-0">
                 <Image
-                    src="/images/upper.jpg"
+                    src="/images/boston-dynamics.png"
                     alt="Lower Texture Background"
                     fill
                     className="object-cover"

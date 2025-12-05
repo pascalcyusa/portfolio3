@@ -17,7 +17,7 @@ export default function SelectedProjects() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {featuredProjects.map((project, index) => (
                         <div key={index} className="flex flex-col group cursor-pointer items-center">
-                            <Link href={`/projects?project=${project.id}`} className="w-full">
+                            <Link href={`/projects?project=${project.id}`} className="w-full" aria-label={`View project: ${project.title}`}>
                                 {/* Frame Style Border with Pattern */}
                                 <div className="relative w-full aspect-[4/3] mb-4 p-6 flex items-center justify-center">
                                     {/* Frame Background */}
@@ -36,6 +36,7 @@ export default function SelectedProjects() {
                                             src={project.image}
                                             alt={project.title}
                                             fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                                         />
                                     </div>

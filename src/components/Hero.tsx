@@ -11,8 +11,8 @@ export default function Hero() {
                     src="/images/pascal-lab-2.png"
                     alt="Upper Texture Background"
                     fill
-                    className="object-cover"
                     priority
+                    className="object-cover"
                 />
             </div>
 

@@ -19,7 +19,7 @@ export default function ResearchProcess() {
 
                         return (
                             <div key={index} className="flex flex-col items-center text-center">
-                                <Link href={`/research#${slug}`} className="w-full">
+                                <Link href={`/research#${slug}`} className="w-full" aria-label={`View research: ${item.title}`}>
                                     {/* Frame Style Border with Pattern */}
                                     <div className="relative w-full aspect-[4/3] mb-4 p-6 flex items-center justify-center cursor-pointer group">
                                         {/* Frame Background */}
@@ -38,6 +38,7 @@ export default function ResearchProcess() {
                                                 src={item.image}
                                                 alt={item.title}
                                                 fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                                             />
                                         </div>

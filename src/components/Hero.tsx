@@ -36,7 +36,7 @@ export default function Hero() {
                         <div className="relative w-full h-full overflow-hidden shadow-2xl flex items-center justify-center">
                             <div className="relative w-[85%] h-[85%]">
                                 <Image
-                                    src="/images/profile.jpg"
+                                    src="/images/profile.png"
                                     alt="Jean Pascal Cyusa Shyaka"
                                     fill
                                     className="object-cover"

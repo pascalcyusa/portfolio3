@@ -48,7 +48,7 @@ export const projects: Project[] = [
             { url: "https://youtu.be/pDoqdQYS55g", caption: "Pokémon Cafe full run" }
         ],
         technicalDetails: [
-            "Software Tools: Used common software for robot control, computer vision (seeing), web communication, and interacting with the hardware.",
+            "Software Tools: Used common software for robot control, computer vision, web communication, and interacting with the hardware.",
             "Navigation Method: Followed a line on the floor using infrared sensors and spotted station locations using a camera looking for colored markers.",
             "Finding Stations: Recognized stations by seeing colored markers and counting them in order along the path.",
             "Getting Orders: Connected to Airtable to receive pancake orders and update the robot's progress.",

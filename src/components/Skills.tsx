@@ -37,7 +37,7 @@ export default function Skills() {
                     100% { transform: translateX(-50%); }
                 }
                 .animate-scroll {
-                    animation: scroll 30s linear infinite;
+                    animation: scroll 80s linear infinite;
                 }
                 .pause-on-hover:hover .animate-scroll {
                     animation-play-state: paused;

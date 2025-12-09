@@ -5,25 +5,15 @@ import { ArrowRight } from "lucide-react";
 export default function Hero() {
     return (
         <section className="relative min-h-screen flex flex-col bg-brand-black overflow-hidden">
-            {/* Top Half - Upper Texture Background */}
-            <div className="absolute top-0 left-0 w-full h-1/2 z-0">
+            {/* Background Image */}
+            <div className="absolute inset-0 w-full h-full z-0">
                 <Image
-                    src="/images/pascal-lab-2.png"
-                    alt="Upper Texture Background"
+                    // You can change this to "/images/boston-dynamics.png" if you prefer that one
+                    src="/images/boston-dynamics.jpg"
+                    alt="Background"
                     fill
                     priority
                     className="object-cover"
-                />
-            </div>
-
-            {/* Bottom Half - Lower Texture Background */}
-            <div className="absolute bottom-0 left-0 w-full h-1/2 z-0">
-                <Image
-                    src="/images/boston-dynamics.png"
-                    alt="Lower Texture Background"
-                    fill
-                    className="object-cover"
-                    priority
                 />
             </div>
 

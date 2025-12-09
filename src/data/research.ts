@@ -12,19 +12,19 @@ export interface ResearchItem {
 
 export const researchData: ResearchItem[] = [
     {
-        id: "ultrasonic-anemometer",
-        title: "Ultrasonic Anemometer",
-        category: "MEMS / Sensors",
-        lab: "Microscale Sensors and Systems Lab",
-        image: "/images/tdk-ch101/img1.jpeg",
-        description: "The Microscale Sensors and Systems Lab is a state of the art lab at Tufts that focuses on the design, fabrication, and testing of microscale sensors and systems. My research area has been on the development of a miniature ultrasonic anemometer using the TDK CH101 sensor. This has potential applications in Navy high-altitude UAVs, and low-pressure environments on Mars.",
-        overview: [
-            "Distance measurements within ± 0.1878 mm error margin",
-            "Wind velocity measurements at ± 0.6454 m/s accuracy",
-            "Working towards ±0.05 m/s wind velocity accuracy"
+        "id": "ultrasonic-anemometer",
+        "title": "Ultrasonic Anemometer",
+        "category": "MEMS / Sensors",
+        "lab": "Microscale Sensors and Systems Lab",
+        "image": "/images/tdk-ch101/img1.jpeg",
+        "description": "The Microscale Sensors and Systems Lab focuses on microscale sensor systems. My research evaluates the TDK CH101 ultrasonic sensor for wind velocity measurement on Mars rovers and high-altitude UAVs. I utilize Python-based statistical pipelines to analyze acoustic Time-of-Flight data against physical ground truths, identifying hardware biases and defining precision limits for off-the-shelf components.",
+        "overview": [
+            "Validated sensor performance with R²=0.91 correlation analysis",
+            "Discovered ±15.6 m/s variance, establishing benchmarks for future creation",
+            "Actively retrofitting wind tunnel with differential pressure taps for precision ground-truth monitoring"
         ],
-        period: "Jun 2024 - Present",
-        link: "https://sites.tufts.edu/senselab/research/#:~:text=Miniaturized%20Ultrasonic%20Anemometer"
+        "period": "Jun 2024 - Present",
+        "link": "https://sites.tufts.edu/senselab/research/#:~:text=Miniaturized%20Ultrasonic%20Anemometer"
     },
     {
         id: "ceeo-outreach",

@@ -479,33 +479,31 @@ export const projects: Project[] = [
             "Real-time data processing"
         ],
         year: "Summer 2024",
-        content: "Data collection automation system for ultrasonic sensors using C and LabVIEW integration.",
+         "content": "Evaluation of MEMS ultrasonic sensors for extraterrestrial wind measurement, utilizing Python statistical pipelines and wind tunnel instrumentation.",
         images: [
             { url: "/images/tdk-ch101/img1.jpeg", caption: "Sensor Mount" },
             { url: "https://invensense.tdk.com/wp-content/uploads/2019/09/rp-mod-ch101.png", caption: "CH101 Sensor © TDK Invensense" },
             { url: "/images/tdk-ch101/img2.jpeg", caption: "Experiment Setup" }
         ],
-        technicalDetails: [
-            "C-based firmware implementation",
-            "LabVIEW 2020 development environment",
-            "Custom USB communication protocol",
-            "Multi-threaded data acquisition system",
-            "Real-time data visualization framework",
-            "Automated calibration routines"
+        "technicalDetails": [
+            "Python Data Analysis Scripts",
+            "Statistical Modeling & Error Analysis",
+            "Wind Tunnel Instrumentation",
+            "Differential Pressure Monitoring",
+            "Pitot-Static Tube Integration",
+            "C & LabVIEW Data Acquisition"
         ],
-        challenges: [
-            "Synchronizing multiple sensor readings",
-            "Optimizing data transfer rates",
-            "Managing large datasets efficiently",
-            "Implementing robust error handling",
-            "Ensuring consistent timing accuracy"
+        "challenges": [
+            "Correlating acoustic Time-of-Flight with physical distance",
+            "Isolating hardware bias from environmental noise",
+            "Meeting 5 cm/s precision targets with commercial off-the-shelf sensors",
+            "Retrofitting existing wind tunnel infrastructure"
         ],
-        outcomes: [
-            "Reduced testing time by 65%",
-            "Improved data accuracy by 30%",
-            "Automated testing of up to 8 sensors simultaneously",
-            "Generated comprehensive test reports automatically",
-            "Created reusable software modules for future projects"
+        "outcomes": [
+            "Developed statistical models verifying R²=0.91 correlation",
+            "Identified ±15.6 m/s variance floor in standard sensor configurations",
+            "Proved necessity for custom signal processing over standard SoC",
+            "Actively retrofitting wind tunnel for real-time flow velocity validation"
         ]
     },
     {

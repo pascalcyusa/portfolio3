@@ -15,6 +15,7 @@ export default function Hero() {
                     priority
                     className="object-cover"
                 />
+                <div className="absolute inset-0 bg-black/50" />
             </div>
 
             {/* Content Container */}
@@ -48,13 +49,13 @@ export default function Hero() {
 
                 {/* Text Content - Top Half */}
                 <div className="relative md:absolute md:top-0 md:right-12 w-full md:w-1/2 md:h-1/2 flex flex-col justify-center items-center md:items-end text-center md:text-right z-30 pt-4 md:pt-20 pb-10 md:pb-0">
-                    <h1 className="font-display text-4xl md:text-7xl lg:text-8xl text-brand-white mb-2 tracking-tighter">
+                    <h1 className="font-display font-bold text-4xl md:text-7xl lg:text-8xl text-brand-white mb-2 tracking-tighter">
                         MECHANICAL
                         <br />
                         <span className="text-brand-orange">ENGINEER.</span>
                     </h1>
                     <div className="flex flex-col items-center md:items-end gap-1 mb-6">
-                        <h2 className="font-sans text-lg md:text-2xl text-gray-300 tracking-widest uppercase">
+                        <h2 className="font-sans text-lg md:text-2xl text-gray-300 font-bold tracking-widest uppercase">
                             Jean Pascal
                         </h2>
                         <h2 className="font-sans text-lg md:text-2xl text-brand-white font-bold tracking-widest uppercase">

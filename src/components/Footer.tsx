@@ -7,11 +7,11 @@ export default function Footer() {
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
                 <div className="text-center md:text-left mb-8 md:mb-0">
                     <Link href="/contact" className="group">
-                        <h3 className="font-display text-2xl uppercase mb-2 group-hover:underline decoration-brand-white underline-offset-4">
+                        <h3 className="font-display text-2xl uppercase mb-2 group-hover:underline decoration-brand-white underline-offset-4 font-bold">
                             Ready to Build and Learn.
                         </h3>
                     </Link>
-                    <p className="font-sans text-sm uppercase opacity-90">
+                    <p className="font-sans text-sm uppercase font-bold">
                         Seeking full-time opportunities
                         <br />
                         Starting June 2026.
@@ -30,7 +30,7 @@ export default function Footer() {
                     </a>
                 </div>
             </div>
-            <div className="text-center mt-8 text-xs font-sans">
+            <div className="text-center mt-8 text-xs font-sans font-bold">
                 &copy; {new Date().getFullYear()} Jean Pascal Cyusa Shyaka. All rights reserved.
             </div>
         </footer>

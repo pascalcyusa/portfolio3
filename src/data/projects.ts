@@ -23,7 +23,7 @@ export interface Project {
 export const projects: Project[] = [
     {
         id: "pokemon-cafe",
-        title: "Pokémon Cafe (Final Project)",
+        title: "Pokémon Cafe",
         category: "ME35 / Simple Robotics",
         image: "/images/pokemon-cafe/img3.jpeg",
         description: "A completely automated system for cooking pancakes",
@@ -83,7 +83,7 @@ export const projects: Project[] = [
     },
     {
         id: "navigate-to-pewter-city",
-        title: "Navigate Back to Pewter City (Navigation Using Object Recognition)",
+        title: "Navigate Back to Pewter City",
         category: "ME35 / Simple Robotics",
         image: "/images/navigate-to-pewter-city/img5.jpeg",
         description: "A iRobot ™️ Create3 programmed to navigate through a maze with 90-degree turns based on object detection.",
@@ -132,7 +132,7 @@ export const projects: Project[] = [
     },
     {
         id: "gym-battle",
-        title: "Gym Battle - Learning to Dodge (Airtable Remote Operation)",
+        title: "Gym Battle",
         category: "ME35 / Simple Robotics",
         image: "/images/navigate-to-pewter-city/img6.jpeg",
         description: "A iRobot ™️ Create3™️ that can be controlled remotely using Airtable.",
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     },
     {
         id: "camera-line-follower",
-        title: "Traverse Victory Road (Camera Line Follower)",
+        title: "Traverse Victory Road",
         category: "ME35 / Simple Robotics",
         image: "/images/camera-line-follower/img1.jpeg",
         description: "A line-following robot designed to navigate paths using a Pi Camera for line detection.",
@@ -221,7 +221,7 @@ export const projects: Project[] = [
     },
     {
         id: "IR-line-follower",
-        title: "Scout A Route (IR Line Follower)",
+        title: "Scout A Route",
         category: "ME35 / Simple Robotics",
         image: "/images/IR-line-follower/img1.png",
         description: "This robot follows a line using an IR sensor.",
@@ -479,7 +479,7 @@ export const projects: Project[] = [
             "Real-time data processing"
         ],
         year: "Summer 2024",
-         "content": "Evaluation of MEMS ultrasonic sensors for extraterrestrial wind measurement, utilizing Python statistical pipelines and wind tunnel instrumentation.",
+        "content": "Evaluation of MEMS ultrasonic sensors for extraterrestrial wind measurement, utilizing Python statistical pipelines and wind tunnel instrumentation.",
         images: [
             { url: "/images/tdk-ch101/img1.jpeg", caption: "Sensor Mount" },
             { url: "https://invensense.tdk.com/wp-content/uploads/2019/09/rp-mod-ch101.png", caption: "CH101 Sensor © TDK Invensense" },

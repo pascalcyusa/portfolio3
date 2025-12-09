@@ -4,6 +4,7 @@ import { Suspense, useState, useEffect } from "react";
 import Image from "next/image";
 import { projects, Project } from "@/data/projects";
 import ProjectModal from "@/components/ProjectModal";
+import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -70,43 +71,14 @@ function ProjectsContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredProjects.map((project, index) => (
-                        <div
+                        <ProjectCard
                             key={index}
-                            className="flex flex-col group border-2 border-brand-white p-4 hover:border-brand-orange transition-colors cursor-pointer"
+                            title={project.title}
+                            category={project.category}
+                            date={project.year}
+                            image={project.image}
                             onClick={() => setSelectedProject(project)}
-                        >
-                            <div className="h-64 w-full relative mb-4 overflow-hidden bg-gray-800">
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                            </div>
-                            <div className="flex justify-between items-start mb-2">
-                                <h2 className="font-display text-2xl uppercase">{project.title}</h2>
-                                {/* Fixed Year Tag Styling: prevent overflow and ensure consistency */}
-                                {project.year && (
-                                    <span className="font-sans text-xs text-brand-orange border border-brand-orange px-2 py-1 rounded-full whitespace-nowrap ml-2 flex-shrink-0">
-                                        {project.year}
-                                    </span>
-                                )}
-                            </div>
-                            <p className="font-sans text-sm text-gray-400 mb-4 flex-grow line-clamp-3">{project.description}</p>
-
-                            <div className="mt-auto">
-                                <h3 className="font-bold text-xs uppercase text-brand-white mb-2">Key Aspects:</h3>
-                                <ul className="list-disc list-inside text-xs text-gray-400 space-y-1">
-                                    {project.overview.slice(0, 3).map((item, i) => (
-                                        <li key={i} className="truncate">{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <div className="mt-4 text-center border border-brand-white py-2 uppercase text-xs font-bold group-hover:bg-brand-white group-hover:text-brand-black transition-colors">
-                                View Details
-                            </div>
-                        </div>
+                        />
                     ))}
                 </div>
             </div>

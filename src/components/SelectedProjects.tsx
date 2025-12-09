@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
+import ProjectCard from "./ProjectCard";
 
 export default function SelectedProjects() {
     const featuredProjects = projects.slice(0, 3);
@@ -16,39 +17,15 @@ export default function SelectedProjects() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {featuredProjects.map((project, index) => (
-                        <div key={index} className="flex flex-col group cursor-pointer items-center">
-                            <Link href={`/projects?project=${project.id}`} className="w-full" aria-label={`View project: ${project.title}`}>
-                                {/* Frame Style Border with Pattern */}
-                                <div className="relative w-full aspect-[4/3] mb-4 p-6 flex items-center justify-center">
-                                    {/* Frame Background */}
-                                    <div className="absolute inset-0 z-0">
-                                        <Image
-                                            src="/images/artefacts/10.png"
-                                            alt="Project Frame"
-                                            fill
-                                            className="object-fill"
-                                        />
-                                    </div>
-
-                                    {/* Project Image */}
-                                    <div className="relative w-[85%] h-[80%] z-10 overflow-hidden bg-gray-800">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                    </div>
-                                </div>
+                        <div key={index} className="w-full">
+                            <Link href={`/projects?project=${project.id}`} aria-label={`View project: ${project.title}`}>
+                                <ProjectCard
+                                    title={project.title}
+                                    category={project.category}
+                                    date={project.year} // Using year as date
+                                    image={project.image}
+                                />
                             </Link>
-
-                            <h3 className="font-sans font-bold text-xl uppercase mb-2 text-brand-white">
-                                {project.title}
-                            </h3>
-                            <p className="font-sans text-sm text-gray-400 line-clamp-3">
-                                {project.description}
-                            </p>
                         </div>
                     ))}
                 </div>

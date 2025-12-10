@@ -8,8 +8,8 @@ export default function Hero() {
             {/* Background Image */}
             <div className="absolute inset-0 w-full h-full z-0">
                 <Image
-                    // You can change this to "/images/boston-dynamics.png" if you prefer that one
-                    src="/images/boston-dynamics.jpg"
+                    // You can change this to "/images/boston-dynamics.webp" if you prefer that one
+                    src="/images/boston-dynamics.webp"
                     alt="Background"
                     fill
                     priority
@@ -27,7 +27,7 @@ export default function Hero() {
                         <div className="relative w-full h-full overflow-hidden shadow-2xl flex items-center justify-center">
                             <div className="relative w-[85%] h-[85%]">
                                 <Image
-                                    src="/images/profile.png"
+                                    src="/images/profile.webp"
                                     alt="Jean Pascal Cyusa Shyaka"
                                     fill
                                     className="object-cover"
@@ -37,7 +37,7 @@ export default function Hero() {
                             {/* Frame Overlay */}
                             <div className="absolute inset-0 z-30 pointer-events-none">
                                 <Image
-                                    src="/images/artefacts/10.png"
+                                    src="/images/artefacts/10.webp"
                                     alt="Frame"
                                     fill
                                     className="object-fill"

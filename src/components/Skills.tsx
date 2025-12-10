@@ -69,7 +69,7 @@ export default function Skills() {
                                             <div className="w-40 h-40 relative flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110">
                                                 <div className="absolute inset-0">
                                                     <Image
-                                                        src={(catIndex * 10 + index) % 2 === 0 ? "/images/artefacts/5.png" : "/images/artefacts/6.png"}
+                                                        src={(catIndex * 10 + index) % 2 === 0 ? "/images/artefacts/5.webp" : "/images/artefacts/6.webp"}
                                                         alt="Skill Pattern"
                                                         fill
                                                         className="object-contain opacity-80"

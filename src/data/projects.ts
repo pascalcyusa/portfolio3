@@ -25,7 +25,7 @@ export const projects: Project[] = [
         id: "pokemon-cafe",
         title: "Pokémon Cafe",
         category: "ME35 / Simple Robotics",
-        image: "/images/pokemon-cafe/img3.jpeg",
+        image: "/images/pokemon-cafe/img3.webp",
         description: "A completely automated system for cooking pancakes",
         overview: [
             "Connects to Airtable to retrieve new pancake orders.",
@@ -39,10 +39,10 @@ export const projects: Project[] = [
         githubUrl: "https://github.com/pascalcyusa/Pokemon-Cafe",
         content: "A completely automated system for cooking pancakes, featuring autonomous transport.",
         images: [
-            { url: "/images/pokemon-cafe/img1.jpeg", caption: "The Create 3 Robot at the whipped cream station" },
-            { url: "/images/pokemon-cafe/img2.jpeg", caption: "The Create 3 Robot at the sprinkles station" },
-            { url: "/images/pokemon-cafe/img3.jpeg", caption: "Complete setup with the order website" },
-            { url: "/images/pokemon-cafe/img4.png", caption: "The orders in airtable" }
+            { url: "/images/pokemon-cafe/img1.webp", caption: "The Create 3 Robot at the whipped cream station" },
+            { url: "/images/pokemon-cafe/img2.webp", caption: "The Create 3 Robot at the sprinkles station" },
+            { url: "/images/pokemon-cafe/img3.webp", caption: "Complete setup with the order website" },
+            { url: "/images/pokemon-cafe/img4.webp", caption: "The orders in airtable" }
         ],
         videos: [
             { url: "https://youtu.be/pDoqdQYS55g", caption: "Pokémon Cafe full run" }
@@ -85,7 +85,7 @@ export const projects: Project[] = [
         id: "navigate-to-pewter-city",
         title: "Navigate Back to Pewter City",
         category: "ME35 / Simple Robotics",
-        image: "/images/navigate-to-pewter-city/img5.jpeg",
+        image: "/images/navigate-to-pewter-city/img5.webp",
         description: "A iRobot ™️ Create3 programmed to navigate through a maze with 90-degree turns based on object detection.",
         overview: [
             "Object detection system for 6-inch proximity sensing",
@@ -99,10 +99,10 @@ export const projects: Project[] = [
         content: "A iRobot ™️ Create3 ™️ programmed to navigate through a maze with 90-degree turns based on object detection.",
         designProcess: "This project focused on navigating a maze using object detection instead of line following or predefined paths. I mounted a camera to the Create 3 robot using a custom CAD design and began writing Python code to detect objects placed in the maze. Each object acted as a directional cue. I developed a routine to turn based on object detection and tuned the turning function using sensor feedback. I tested movement, detection accuracy, and reaction timing extensively to make sure the robot handled real-time decisions reliably without needing visual markers like tape.",
         images: [
-            { url: "/images/navigate-to-pewter-city/img1.jpeg", caption: "The Create 3 Robot with a camera mount" },
-            { url: "/images/navigate-to-pewter-city/img4.jpeg", caption: "Front view of the Create 3 Robot" },
-            { url: "/images/navigate-to-pewter-city/img7.png", caption: "CAD Model of the camera mount" },
-            { url: "/images/navigate-to-pewter-city/img9.jpeg", caption: "Objects to be detected" }
+            { url: "/images/navigate-to-pewter-city/img1.webp", caption: "The Create 3 Robot with a camera mount" },
+            { url: "/images/navigate-to-pewter-city/img4.webp", caption: "Front view of the Create 3 Robot" },
+            { url: "/images/navigate-to-pewter-city/img7.webp", caption: "CAD Model of the camera mount" },
+            { url: "/images/navigate-to-pewter-city/img9.webp", caption: "Objects to be detected" }
         ],
         videos: [
             { url: "https://youtube.com/shorts/U1IJRvnf8W8?feature=share", caption: "Video demonstration of the robot in action" },
@@ -134,7 +134,7 @@ export const projects: Project[] = [
         id: "gym-battle",
         title: "Gym Battle",
         category: "ME35 / Simple Robotics",
-        image: "/images/navigate-to-pewter-city/img6.jpeg",
+        image: "/images/navigate-to-pewter-city/img6.webp",
         description: "A iRobot ™️ Create3™️ that can be controlled remotely using Airtable.",
         overview: [
             "Remote control via Airtable with real-time feedback",
@@ -148,9 +148,9 @@ export const projects: Project[] = [
         content: "A Create 3 Robot ™️ robot that can be controlled remotely using Airtable.",
         designProcess: "This project aimed at designing a robot remote control system. I used Airtable as a control interface, setting up a polling loop in Python to check for new commands. For remote visibility, I mounted a phone to the robot and streamed live video through Zoom to someone in a different room. That person would enter commands in Airtable to move the robot around obstacles. Since there was no direct line of sight and some network lag, I had to carefully time each command and add logic to ignore repeated inputs. The focus was making the robot easy to control even with limited feedback.",
         images: [
-            { url: "/images/navigate-to-pewter-city/img6.jpeg", caption: "The Create 3 Robot" },
-            { url: "/images/gym-battle/img1.jpeg", caption: "Airtable Commands" },
-            { url: "/images/gym-battle/img2.jpg", caption: "Obstacles in the robot's path" }
+            { url: "/images/navigate-to-pewter-city/img6.webp", caption: "The Create 3 Robot" },
+            { url: "/images/gym-battle/img1.webp", caption: "Airtable Commands" },
+            { url: "/images/gym-battle/img2.webp", caption: "Obstacles in the robot's path" }
         ],
         videos: [
             { url: "https://youtube.com/shorts/04uJjxwYFIk?feature=share", caption: "Video demonstration of the robot in action" }
@@ -179,7 +179,7 @@ export const projects: Project[] = [
         id: "camera-line-follower",
         title: "Traverse Victory Road",
         category: "ME35 / Simple Robotics",
-        image: "/images/camera-line-follower/img1.jpeg",
+        image: "/images/camera-line-follower/img1.webp",
         description: "A line-following robot designed to navigate paths using a Pi Camera for line detection.",
         overview: [
             "Uses computer vision (OpenCV) to detect and follow lines from a camera feed.",
@@ -193,8 +193,8 @@ export const projects: Project[] = [
         content: "A line-following robot designed to navigate paths using a Pi Camera for line detection. ",
         designProcess: "This project used computer vision to detect a black line on the floor with a Pi Camera. I used OpenCV for image processing and programmed a proportional controller to adjust steering based on the line's center. Early tests showed inconsistent performance due to lighting changes, so I adjusted the camera angle and image resolution. I also tested different thresholding techniques and created a simple line recovery system. Most of the debugging came from trying things over and over — watching the robot fail, and tweaking small parts of the code until it worked better.",
         images: [
-            { url: "/images/camera-line-follower/img1.jpeg", caption: "Robot's side view" },
-            { url: "/images/camera-line-follower/img3.jpeg", caption: "Robot's top view" }
+            { url: "/images/camera-line-follower/img1.webp", caption: "Robot's side view" },
+            { url: "/images/camera-line-follower/img3.webp", caption: "Robot's top view" }
         ],
         videos: [
             { url: "https://www.youtube.com/watch?v=kxjFOwbjV9U", caption: "Video demonstration of the robot in action" }
@@ -223,7 +223,7 @@ export const projects: Project[] = [
         id: "IR-line-follower",
         title: "Scout A Route",
         category: "ME35 / Simple Robotics",
-        image: "/images/IR-line-follower/img1.png",
+        image: "/images/IR-line-follower/img1.webp",
         description: "This robot follows a line using an IR sensor.",
         overview: [
             "Use an IR sensor for real-time line detection",
@@ -237,7 +237,7 @@ export const projects: Project[] = [
         content: "This robot follows a line using an IR sensor.",
         designProcess: "The goal here was to follow a black line using an IR sensor and basic hardware. I started by placing the sensor too high, so readings were bad. I tested different mounting heights and angles until the readings were more stable. Since we were limited to the course kit, I built the chassis using simple parts and focused on getting one thing right — following the line accurately. I attempted two of the three paths, and the robot managed to follow the line without any issues.",
         images: [
-            { url: "/images/IR-line-follower/img1.png", caption: "Assembled IR line follower robot" }
+            { url: "/images/IR-line-follower/img1.webp", caption: "Assembled IR line follower robot" }
         ],
         videos: [
             { url: "https://youtu.be/Y7LEzXW6B6A", caption: "IR line follower in action" },
@@ -264,7 +264,7 @@ export const projects: Project[] = [
         id: "pokemon-ball-sorter",
         title: "Pokémon Ball Sorter",
         category: "ME35 / Simple Robotics",
-        image: "/images/pokemon-ball-sorter/ball-sorter-1.jpeg",
+        image: "/images/pokemon-ball-sorter/ball-sorter-1.webp",
         description: "A robot that automatically detects and sorts colored balls using color detection and servo positioning.",
         overview: [
             "Continuous ball feeding using threaded stepper motor control",
@@ -278,8 +278,8 @@ export const projects: Project[] = [
         content: "A robot that automatically detects and sorts colored balls using color detection and servo positioning.",
         designProcess: "I designed this robot to sort Poké Balls by color using an RGB sensor and servo motor. My first tests were checking how reliable the color sensor was, especially under classroom lighting conditions. Once I locked in the thresholds, I connected a servo that would rotate to the correct box based on the color detected. The early version dropped balls in the wrong spots, so I reworked the servo timing and adjusted bin positions. It took a bunch of trial runs to get it all working together.",
         images: [
-            { url: "/images/pokemon-ball-sorter/cad2.png", caption: "CAD design of the ball sorter mechanism" },
-            { url: "/images/pokemon-ball-sorter/ball-sorter-1.jpeg", caption: "Final assembled system" }
+            { url: "/images/pokemon-ball-sorter/cad2.webp", caption: "CAD design of the ball sorter mechanism" },
+            { url: "/images/pokemon-ball-sorter/ball-sorter-1.webp", caption: "Final assembled system" }
         ],
         videos: [
             { url: "https://youtu.be/UhgyvbBYM8Y", caption: "Ball sorter in action" }
@@ -305,7 +305,7 @@ export const projects: Project[] = [
         id: "pokemon-gripper",
         title: "Pokémon Ball Gripper",
         category: "ME35 / Simple Robotics",
-        image: "/images/pokemon-gripper/gripper.jpeg",
+        image: "/images/pokemon-gripper/gripper.webp",
         description: "Mechanical gripper system designed to safely handle and transport a Poké Ball using stepper motor actuation.",
         overview: [
             "Custom-designed linkage and gear system",
@@ -318,8 +318,8 @@ export const projects: Project[] = [
         content: "Mechanical gripper system designed to safely handle and transport a Poké Ball using stepper motor actuation.",
         designProcess: "I wanted to make a mechanical system that could pick up and move a Poké Ball without dropping it. Our group decided on using a pulley system to control the gripper cups, and I adjusted motor timing in the code. Most of the design choices came down to trial and improvement — watching the robot fail, then changing a part until it got better.",
         images: [
-            { url: "/images/pokemon-gripper/cad.png", caption: "CAD design of the gripper mechanism" },
-            { url: "/images/pokemon-gripper/gripper.jpeg", caption: "Final assembled gripper system" }
+            { url: "/images/pokemon-gripper/cad.webp", caption: "CAD design of the gripper mechanism" },
+            { url: "/images/pokemon-gripper/gripper.webp", caption: "Final assembled gripper system" }
         ],
         technicalDetails: [
             "Custom-designed linkage and gear system",
@@ -340,7 +340,7 @@ export const projects: Project[] = [
         id: "ballon-dor-replica",
         title: "Ballon d’Or Replica",
         category: "ME10 / Materials & Manufacturing",
-        image: "/images/ballon-dor-replica/dor2.jpeg",
+        image: "/images/ballon-dor-replica/dor2.webp",
         description: "Designed and fabricated a replica of the Ballon d’Or using sand casting and lost wax casting, achieving a close resemblance to the real trophy.",
         overview: [
             "SolidWorks design for accurate modeling",
@@ -351,14 +351,14 @@ export const projects: Project[] = [
         year: "Fall 2023",
         content: "Designed and fabricated a replica of the Ballon d’Or trophy using sand casting and lost wax casting techniques, achieving a high-quality final product closely resembling the original.",
         images: [
-            { url: "/images/ballon-dor-replica/dor2.jpeg", caption: "Final polished Ballon d’Or replica" },
-            { url: "/images/ballon-dor-replica/dor1.jpeg", caption: "Replica view 1" },
-            { url: "/images/ballon-dor-replica/dor3.jpeg", caption: "Replica view 2" },
-            { url: "/images/ballon-dor-replica/dor4.jpeg", caption: "Replica view 3" },
-            { url: "/images/ballon-dor-replica/dor5.jpeg", caption: "Replica view 4" },
-            { url: "/images/ballon-dor-replica/dor6.jpeg", caption: "Replica view 5" },
-            { url: "/images/ballon-dor-replica/dor7.jpeg", caption: "Replica view 6" },
-            { url: "/images/ballon-dor-replica/dor8.jpeg", caption: "Replica view 7" }
+            { url: "/images/ballon-dor-replica/dor2.webp", caption: "Final polished Ballon d’Or replica" },
+            { url: "/images/ballon-dor-replica/dor1.webp", caption: "Replica view 1" },
+            { url: "/images/ballon-dor-replica/dor3.webp", caption: "Replica view 2" },
+            { url: "/images/ballon-dor-replica/dor4.webp", caption: "Replica view 3" },
+            { url: "/images/ballon-dor-replica/dor5.webp", caption: "Replica view 4" },
+            { url: "/images/ballon-dor-replica/dor6.webp", caption: "Replica view 5" },
+            { url: "/images/ballon-dor-replica/dor7.webp", caption: "Replica view 6" },
+            { url: "/images/ballon-dor-replica/dor8.webp", caption: "Replica view 7" }
         ],
         technicalDetails: [
             "Designed using SolidWorks",
@@ -386,7 +386,7 @@ export const projects: Project[] = [
         id: "hip-truss-bridge",
         title: "Hip Truss Bridge",
         category: "ME20 / Mechanics",
-        image: "/images/hip-truss-bridge/truss1.png",
+        image: "/images/hip-truss-bridge/truss1.webp",
         description: "Designed and built a hip truss bridge to understand structural loads. The project involved SolidWorks modeling, acrylic assembly, and internal force analysis through theoretical calculations and FEA.",
         overview: [
             "Truss bridge design using SolidWorks",
@@ -397,10 +397,10 @@ export const projects: Project[] = [
         year: "Fall 2023",
         content: "Designed and built a hip truss bridge to understand structural loads. The project involved SolidWorks modeling, acrylic assembly, and internal force analysis through theoretical calculations and FEA.",
         images: [
-            { url: "/images/hip-truss-bridge/truss1.png", caption: "Bridge Side View" },
-            { url: "/images/hip-truss-bridge/truss2.png", caption: "Load Testing Setup" },
-            { url: "/images/hip-truss-bridge/truss3.png", caption: "FEA Analysis Result" },
-            { url: "/images/hip-truss-bridge/truss4.png", caption: "Bridge assembly using acrylic and glue" }
+            { url: "/images/hip-truss-bridge/truss1.webp", caption: "Bridge Side View" },
+            { url: "/images/hip-truss-bridge/truss2.webp", caption: "Load Testing Setup" },
+            { url: "/images/hip-truss-bridge/truss3.webp", caption: "FEA Analysis Result" },
+            { url: "/images/hip-truss-bridge/truss4.webp", caption: "Bridge assembly using acrylic and glue" }
         ],
         technicalDetails: [
             "Material selection: Acrylic for predictable failure mode",
@@ -424,7 +424,7 @@ export const projects: Project[] = [
         id: "dog-treat-dispenser",
         title: "Dog Treat Dispenser",
         category: "ME40 / Engineering Design",
-        image: "/images/dog-treat-dispenser/dispens1.png",
+        image: "/images/dog-treat-dispenser/dispens1.webp",
         description: "Designed a wheelchair-mounted dog treat dispenser for Ryan, a user with a spinal cord injury, ensuring minimal effort in dispensing and preventing unintended access by the dog.",
         overview: [
             "User-friendly design requiring minimal effort",
@@ -435,8 +435,8 @@ export const projects: Project[] = [
         year: "Spring 2024",
         content: "Designed a wheelchair-mounted dog treat dispenser for Ryan, a user with a spinal cord injury, ensuring minimal effort in dispensing and preventing unintended access by the dog.",
         images: [
-            { url: "/images/dog-treat-dispenser/dispens1.png", caption: "Final Assembly" },
-            { url: "/images/dog-treat-dispenser/blueprint.png", caption: "Blueprint of the dog treat dispenser" }
+            { url: "/images/dog-treat-dispenser/dispens1.webp", caption: "Final Assembly" },
+            { url: "/images/dog-treat-dispenser/blueprint.webp", caption: "Blueprint of the dog treat dispenser" }
         ],
         videos: [
             { url: "https://youtube.com/shorts/POaRSqfHcnQ", caption: "Treat Dispenser in action" }
@@ -468,7 +468,7 @@ export const projects: Project[] = [
         id: "tdk-ch101",
         title: "TDK CH101 Ultrasonic Sensor Automation",
         category: "MEMS / Sensors",
-        image: "/images/tdk-ch101/img1.jpeg",
+        image: "/images/tdk-ch101/img1.webp",
         description: "Data collection automation system for ultrasonic sensors using C and LabVIEW integration.",
         overview: [
             "C and LabVIEW integration",
@@ -479,9 +479,9 @@ export const projects: Project[] = [
         year: "Summer 2024",
         "content": "This project focused on developing an automated data collection system for TDK's CH101 ultrasonic sensors, streamlining the testing and validation process through sophisticated software integration.",
         images: [
-            { url: "/images/tdk-ch101/img1.jpeg", caption: "Sensor Mount" },
+            { url: "/images/tdk-ch101/img1.webp", caption: "Sensor Mount" },
             { url: "https://invensense.tdk.com/wp-content/uploads/2019/09/rp-mod-ch101.png", caption: "CH101 Sensor © TDK Invensense" },
-            { url: "/images/tdk-ch101/img2.jpeg", caption: "Experiment Setup" }
+            { url: "/images/tdk-ch101/img2.webp", caption: "Experiment Setup" }
         ],
         "technicalDetails": [
             "Python Data Analysis Scripts",
@@ -506,7 +506,7 @@ export const projects: Project[] = [
         id: "lego-arduino",
         title: "LEGO & Arduino Education",
         category: "Education",
-        image: "/images/ceeo-outreach/img4.jpg",
+        image: "/images/ceeo-outreach/img4.webp",
         description: "Educational robotics projects using LEGO Mindstorms and Arduino.",
         overview: [
             "LEGO Mindstorms integration",
@@ -517,8 +517,8 @@ export const projects: Project[] = [
         year: "Summer 2023",
         content: "An innovative educational initiative combining LEGO Mindstorms with Arduino technology to create engaging STEM learning experiences for students. The project focused on hands-on learning and practical application of programming concepts.",
         images: [
-            { url: "/images/ceeo-outreach/img5.jpeg", caption: "Robot car controlled with SPIKE Prime ™️ Hub" },
-            { url: "/images/ceeo-outreach/img1.jpeg", caption: "Classroom Setup" }
+            { url: "/images/ceeo-outreach/img5.webp", caption: "Robot car controlled with SPIKE Prime ™️ Hub" },
+            { url: "/images/ceeo-outreach/img1.webp", caption: "Classroom Setup" }
         ],
         technicalDetails: [
             "Arduino Uno and Nano integration",
@@ -552,7 +552,7 @@ export const projects: Project[] = [
         id: "social-networking-app",
         title: "Zina",
         category: "Web & Mobile Apps",
-        image: "/images/social-networking-app/img3.png",
+        image: "/images/social-networking-app/img3.webp",
         description: "Zina is a social networking application designed to help users manage and visualize their personal and professional connections.",
         overview: [
             "Manage a list of contacts with add, edit, and delete functionality",
@@ -568,9 +568,9 @@ export const projects: Project[] = [
         githubUrl: "https://github.com/pascalcyusa/Zina",
         content: "Zina is a social networking application designed to help users manage and visualize their personal and professional connections. The app allows users to add, edit, and delete contacts, and provides a graphical representation of their network.",
         images: [
-            { url: "/images/social-networking-app/icon.png", caption: "App Icon" },
-            { url: "/images/social-networking-app/img1.jpeg", caption: "Main Interface" },
-            { url: "/images/social-networking-app/img2.jpeg", caption: "Graph Display" }
+            { url: "/images/social-networking-app/icon.webp", caption: "App Icon" },
+            { url: "/images/social-networking-app/img1.webp", caption: "Main Interface" },
+            { url: "/images/social-networking-app/img2.webp", caption: "Graph Display" }
         ],
         technicalDetails: [
             "Developed using Swift and SwiftUI",
@@ -598,7 +598,7 @@ export const projects: Project[] = [
         id: "splendor-game",
         title: "Splendor Game",
         category: "C++ Projects",
-        image: "/images/splendor-game/img2.png",
+        image: "/images/splendor-game/img2.webp",
         description: "Terminal-based implementation of the Splendor board game in C++.",
         overview: [
             "Object-oriented design",
@@ -610,7 +610,7 @@ export const projects: Project[] = [
         githubUrl: undefined,
         content: "Terminal-based implementation of the Splendor board game in C++.",
         images: [
-            { url: "/images/splendor-game/img2.png", caption: "Mockup of the terminal gameplay interface" }
+            { url: "/images/splendor-game/img2.webp", caption: "Mockup of the terminal gameplay interface" }
         ],
         technicalDetails: [
             "C++17 standard implementation",
@@ -645,7 +645,7 @@ export const projects: Project[] = [
         id: "personal-website",
         title: "Portfolio",
         category: "Web & Mobile Apps",
-        image: "/images/personal-website/img1.png",
+        image: "/images/personal-website/img1.webp",
         description: "A modern, responsive portfolio website that overview a clean and user-friendly design.",
         overview: [
             "Fully Responsive Design: Optimal viewing experience on desktops, tablets, and mobile devices.",
@@ -658,8 +658,8 @@ export const projects: Project[] = [
         githubUrl: "https://github.com/pascalcyusa/portfolio2",
         content: "A modern, responsive portfolio website that features a clean and user-friendly design.",
         images: [
-            { url: "/images/personal-website/img3.jpeg", caption: "Homepage design" },
-            { url: "/images/personal-website/img4.jpeg", caption: "Portfolio section" }
+            { url: "/images/personal-website/img3.webp", caption: "Homepage design" },
+            { url: "/images/personal-website/img4.webp", caption: "Portfolio section" }
         ],
         technicalDetails: [
             "Frontend Stack: Built with React and TypeScript for a robust, modern foundation.",

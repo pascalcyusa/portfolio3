@@ -23,7 +23,7 @@ export const researchData: ResearchItem[] = [
         title: "Ultrasonic Anemometer",
         category: "MEMS / Sensors",
         lab: "Microscale Sensors and Systems Lab",
-        image: "/images/tdk-ch101/img1.jpeg",
+        image: "/images/tdk-ch101/img1.webp",
         description: "The Microscale Sensors and Systems Lab is a state of the art lab at Tufts that focuses on the design, fabrication, and testing of microscale sensors and systems. My research area has been on the development of a miniature ultrasonic anemometer using the TDK CH101 sensor. This has potential applications in Navy high-altitude UAVs, and low-pressure environments on Mars.",
         overview: [
             "Distance measurements within ± 0.1878 mm error margin",
@@ -35,7 +35,7 @@ export const researchData: ResearchItem[] = [
         content: "The Microscale Sensors and Systems Lab is a state of the art lab at Tufts that focuses on the design, fabrication, and testing of microscale sensors and systems. My research has area has been on the development of a miniature ultrasonic anemometer using the TDK CH101 sensor. This has potential applications in Navy high-altitude UAVs, and low-pressure environments on Mars.",
         images: [
             {
-                url: "/images/tdk-ch101/img1.jpeg",
+                url: "/images/tdk-ch101/img1.webp",
                 caption: "TDK CH101 Sensor used to measure flow. Here, the sensor is measuring flow at standard room conditions."
             }
         ],
@@ -52,7 +52,7 @@ export const researchData: ResearchItem[] = [
         title: "Engineering Education Outreach",
         category: "Education",
         lab: "Tufts Center for Engineering Education and Outreach",
-        image: "/images/ceeo-outreach/img4.jpg",
+        image: "/images/ceeo-outreach/img4.webp",
         description: "As an Outreach Learning Fellow at Tufts University's Center for Engineering Education and Outreach (CEEO), I’ve had the opportunity to engage with students from underrepresented communities and support their learning in STEM. What excites me most about being an outreach learning fellow is the chance to inspire curiosity and build confidence in young learners through hands-on activities and creative problem-solving.",
         overview: [
             "Designed and tested interactive engineering lessons for outreach programs",
@@ -64,11 +64,11 @@ export const researchData: ResearchItem[] = [
         content: "As an Outreach Learning Fellow at Tufts University's Center for Engineering Education and Outreach (CEEO), I’ve had the opportunity to engage with students from underrepresented communities and support their learning in STEM. What excites me most about being an outreach learning fellow is the chance to inspire curiosity and build confidence in young learners through hands-on activities and creative problem-solving.",
         images: [
             {
-                url: "/images/ceeo-outreach/img1.jpeg",
+                url: "/images/ceeo-outreach/img1.webp",
                 caption: undefined
             },
             {
-                url: "/images/ceeo-outreach/img5.jpeg",
+                url: "/images/ceeo-outreach/img5.webp",
                 caption: undefined
             }
         ],
@@ -90,7 +90,7 @@ export const researchData: ResearchItem[] = [
         title: "Playful Engineering Based Learning (PEBL) Curriculum",
         category: "Education",
         lab: "Tufts Center for Engineering Education and Outreach",
-        image: "/images/ceeo-outreach/img2.jpg",
+        image: "/images/ceeo-outreach/img2.webp",
         description: "Developed comprehensive STEM curricula for K-12 students, focusing on practical engineering applications using LEGO and Arduino projects. Led the implementation of maker spaces across Rwanda, significantly impacting student engagement and learning outcomes.",
         overview: [
             "Established maker spaces in 20+ Rwandan schools",
@@ -103,11 +103,11 @@ export const researchData: ResearchItem[] = [
         content: "Developed comprehensive STEM curricula for K-12 students, focusing on practical engineering applications using LEGO and Arduino projects. Led the implementation of maker spaces across Rwanda, significantly impacting student engagement and learning outcomes.",
         images: [
             {
-                url: "/images/ceeo-outreach/img2.jpg",
+                url: "/images/ceeo-outreach/img2.webp",
                 caption: "An Arduino robot presented by one of the students in the Makerspace competition at Maranyundo"
             },
             {
-                url: "/images/ceeo-outreach/img3.jpg",
+                url: "/images/ceeo-outreach/img3.webp",
                 caption: "The team that won first place at the Maranyundo Makerspace competition"
             }
         ],

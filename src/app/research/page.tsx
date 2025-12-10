@@ -49,20 +49,20 @@ function ResearchContent() {
                 <div className="flex flex-wrap gap-4 mb-16">
                     <button
                         onClick={() => setSelectedCategory(null)}
-                        className={`px-6 py-2 rounded-full font-bold text-sm uppercase transition-all ${selectedCategory === null
-                            ? "bg-brand-orange text-white"
-                            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                        className={`px-4 py-2 rounded-full border border-brand-white text-sm uppercase tracking-wider transition-colors ${selectedCategory === null
+                                ? "bg-brand-orange border-brand-orange text-white"
+                                : "hover:bg-gray-800"
                             }`}
                     >
-                        All Areas
+                        All
                     </button>
                     {categories.map((category) => (
                         <button
                             key={category}
                             onClick={() => setSelectedCategory(category)}
-                            className={`px-6 py-2 rounded-full font-bold text-sm uppercase transition-all ${selectedCategory === category
-                                ? "bg-brand-orange text-white"
-                                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                            className={`px-4 py-2 rounded-full border border-brand-white text-sm uppercase tracking-wider transition-colors ${selectedCategory === category
+                                    ? "bg-brand-orange border-brand-orange text-white"
+                                    : "hover:bg-gray-800"
                                 }`}
                         >
                             {category}

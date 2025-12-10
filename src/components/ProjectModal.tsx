@@ -3,7 +3,7 @@
 import { Project } from "@/data/projects";
 import { ResearchItem } from "@/data/research";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight, Github, FileText } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Github, FileText, Maximize2 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 interface ProjectModalProps {
@@ -39,6 +39,7 @@ const getYoutubeEmbedUrl = (url: string) => {
 
 export default function ProjectModal({ project, onClose, onNext, onPrev }: ProjectModalProps) {
     const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+    const [isFullScreen, setIsFullScreen] = useState(false);
 
     // Combine images and videos for the carousel
     const images = project.images || [{ url: project.image, caption: project.title }];
@@ -56,6 +57,7 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
     // Reset media index when project changes
     useEffect(() => {
         setCurrentMediaIndex(0);
+        setIsFullScreen(false);
     }, [project.id]);
 
     // Prevent background scrolling when modal is open
@@ -144,32 +146,44 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
 
                 {/* Left Column: Media */}
                 <div className="relative h-[40%] md:h-full bg-black flex items-center justify-center group">
-                    {currentMedia.type === 'image' ? (
-                        <div className="relative w-full h-full">
-                            <Image
-                                src={currentMedia.url}
-                                alt={currentMedia.caption || project.title}
-                                fill
-                                className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent md:hidden" />
-                        </div>
-                    ) : (
-                        <div className="relative w-full h-full bg-black">
-                            {getYoutubeEmbedUrl(currentMedia.url) ? (
-                                <iframe
-                                    src={getYoutubeEmbedUrl(currentMedia.url)!}
-                                    className="w-full h-full"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
+                    <div
+                        className="relative w-full h-full cursor-zoom-in"
+                        onClick={() => setIsFullScreen(true)}
+                    >
+                        {currentMedia.type === 'image' ? (
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={currentMedia.url}
+                                    alt={currentMedia.caption || project.title}
+                                    fill
+                                    className="object-cover"
                                 />
-                            ) : (
-                                <div className="flex items-center justify-center h-full text-white">
-                                    <a href={currentMedia.url} target="_blank" className="underline">View Video</a>
-                                </div>
-                            )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent md:hidden" />
+                            </div>
+                        ) : (
+                            <div className="relative w-full h-full bg-black">
+                                {getYoutubeEmbedUrl(currentMedia.url) ? (
+                                    <iframe
+                                        src={getYoutubeEmbedUrl(currentMedia.url)!}
+                                        className="w-full h-full pointer-events-none" // Disable pointer events to allow click-to-fullscreen
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    />
+                                ) : (
+                                    <div className="flex items-center justify-center h-full text-white">
+                                        <div className="text-center">
+                                            <p className="mb-2">Click to View Video</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Hover Overlay with Maximize Icon */}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <Maximize2 className="text-white drop-shadow-lg" size={48} />
                         </div>
-                    )}
+                    </div>
 
                     {/* Media Navigation */}
                     {mediaItems.length > 1 && (
@@ -295,6 +309,63 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
 
                 </div>
             </div>
+            {/* Full Screen Overlay */}
+            {isFullScreen && (
+                <div
+                    className="fixed inset-0 z-[60] bg-black flex items-center justify-center animate-in fade-in duration-200"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setIsFullScreen(false);
+                    }}
+                >
+                    <button
+                        className="absolute top-4 right-4 text-white hover:text-brand-orange z-50 p-2"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsFullScreen(false);
+                        }}
+                    >
+                        <X size={32} />
+                    </button>
+
+                    <div className="relative w-full h-full max-w-7xl max-h-screen p-4 flex items-center justify-center" onClick={e => e.stopPropagation()}>
+                        {currentMedia.type === 'image' ? (
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={currentMedia.url}
+                                    alt={currentMedia.caption || project.title}
+                                    fill
+                                    className="object-contain"
+                                    quality={100}
+                                />
+                            </div>
+                        ) : (
+                            <div className="relative w-full h-full max-h-[90vh] aspect-video bg-black">
+                                {getYoutubeEmbedUrl(currentMedia.url) ? (
+                                    <iframe
+                                        src={getYoutubeEmbedUrl(currentMedia.url)!}
+                                        className="w-full h-full"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    />
+                                ) : (
+                                    <div className="flex items-center justify-center h-full text-white">
+                                        <a href={currentMedia.url} target="_blank" className="text-2xl underline hover:text-brand-orange">Watch on External Site</a>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {currentMedia.caption && (
+                            <div className="absolute bottom-8 left-0 right-0 text-center pointer-events-none">
+                                <span className="bg-black/70 text-white text-sm py-2 px-4 rounded-full backdrop-blur-md">
+                                    {currentMedia.caption}
+                                </span>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

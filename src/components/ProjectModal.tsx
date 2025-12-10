@@ -157,6 +157,8 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                                     alt={currentMedia.caption || project.title}
                                     fill
                                     className="object-cover"
+                                    priority
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent md:hidden" />
                             </div>
@@ -336,7 +338,9 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                                     alt={currentMedia.caption || project.title}
                                     fill
                                     className="object-contain"
+                                    priority
                                     quality={100}
+                                    sizes="100vw"
                                 />
                             </div>
                         ) : (

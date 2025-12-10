@@ -7,12 +7,13 @@ import ProjectModal from "@/components/ProjectModal";
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 function ProjectsContent() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const searchParams = useSearchParams();
+    const router = useRouter();
 
     // Handle deep linking via query param
     useEffect(() => {
@@ -88,7 +89,10 @@ function ProjectsContent() {
                 <ProjectModal
                     key={selectedProject.id}
                     project={selectedProject}
-                    onClose={() => setSelectedProject(null)}
+                    onClose={() => {
+                        setSelectedProject(null);
+                        router.push("/projects", { scroll: false });
+                    }}
                     onNext={() => {
                         const currentIndex = filteredProjects.findIndex(p => p.id === selectedProject.id);
                         const nextIndex = (currentIndex + 1) % filteredProjects.length;

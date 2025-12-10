@@ -72,7 +72,7 @@ export default function Navbar() {
                         href="/contact"
                         className="font-display uppercase tracking-widest text-xs px-6 py-2 border border-brand-white/30 rounded-full hover:bg-brand-white hover:text-brand-black transition-all duration-300 font-bold"
                     >
-                        Contact Me
+                        Contact
                     </Link>
                 </div>
             </div>
@@ -106,7 +106,7 @@ export default function Navbar() {
                         onClick={closeMobileMenu}
                         className="font-display uppercase tracking-widest text-sm px-8 py-3 border border-brand-white/30 rounded-full hover:bg-brand-white hover:text-brand-black transition-all duration-300 font-bold"
                     >
-                        Contact Me
+                        Contact
                     </Link>
                 </div>
             )}

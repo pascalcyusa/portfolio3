@@ -436,8 +436,6 @@ export const projects: Project[] = [
         content: "Designed a wheelchair-mounted dog treat dispenser for Ryan, a user with a spinal cord injury, ensuring minimal effort in dispensing and preventing unintended access by the dog.",
         images: [
             { url: "/images/dog-treat-dispenser/dispens1.png", caption: "Final Assembly" },
-            { url: "/images/dog-treat-dispenser/dispens2.png", caption: "Mounting Mechanism" },
-            { url: "/images/dog-treat-dispenser/dispens3.png", caption: "User Testing" },
             { url: "/images/dog-treat-dispenser/blueprint.png", caption: "Blueprint of the dog treat dispenser" }
         ],
         videos: [
@@ -479,7 +477,7 @@ export const projects: Project[] = [
             "Real-time data processing"
         ],
         year: "Summer 2024",
-        "content": "Evaluation of MEMS ultrasonic sensors for extraterrestrial wind measurement, utilizing Python statistical pipelines and wind tunnel instrumentation.",
+        "content": "This project focused on developing an automated data collection system for TDK's CH101 ultrasonic sensors, streamlining the testing and validation process through sophisticated software integration.",
         images: [
             { url: "/images/tdk-ch101/img1.jpeg", caption: "Sensor Mount" },
             { url: "https://invensense.tdk.com/wp-content/uploads/2019/09/rp-mod-ch101.png", caption: "CH101 Sensor © TDK Invensense" },
@@ -500,10 +498,8 @@ export const projects: Project[] = [
             "Retrofitting existing wind tunnel infrastructure"
         ],
         "outcomes": [
-            "Developed statistical models verifying R²=0.91 correlation",
-            "Identified ±15.6 m/s variance floor in standard sensor configurations",
-            "Proved necessity for custom signal processing over standard SoC",
-            "Actively retrofitting wind tunnel for real-time flow velocity validation"
+            "Reduced testing time by 65%",
+            "Improved data accuracy by 30%"
         ]
     },
     {
@@ -555,7 +551,7 @@ export const projects: Project[] = [
     {
         id: "social-networking-app",
         title: "Zina",
-        category: "Web Development",
+        category: "Web & Mobile Apps",
         image: "/images/social-networking-app/img3.png",
         description: "Zina is a social networking application designed to help users manage and visualize their personal and professional connections.",
         overview: [
@@ -566,9 +562,9 @@ export const projects: Project[] = [
             "Multi-step wizard for adding new contacts",
             "Bidirectional connection management between contacts",
             "Integration with SwiftUI for a modern user interface",
-            "Persistent storage of contacts using JSON encoding and decoding"
+            "Persistent storage` of contacts using JSON encoding and decoding"
         ],
-        year: undefined,
+        year: "Dec 2024",
         githubUrl: "https://github.com/pascalcyusa/Zina",
         content: "Zina is a social networking application designed to help users manage and visualize their personal and professional connections. The app allows users to add, edit, and delete contacts, and provides a graphical representation of their network.",
         images: [
@@ -611,7 +607,7 @@ export const projects: Project[] = [
             "Terminal-based UI"
         ],
         year: "Spring 2023",
-        githubUrl: "https://github.com/pascalcyusa/cs11",
+        githubUrl: undefined,
         content: "Terminal-based implementation of the Splendor board game in C++.",
         images: [
             { url: "/images/splendor-game/img2.png", caption: "Mockup of the terminal gameplay interface" }
@@ -648,7 +644,7 @@ export const projects: Project[] = [
     {
         id: "personal-website",
         title: "Portfolio",
-        category: "Web Development",
+        category: "Web & Mobile Apps",
         image: "/images/personal-website/img1.png",
         description: "A modern, responsive portfolio website that overview a clean and user-friendly design.",
         overview: [
@@ -662,8 +658,8 @@ export const projects: Project[] = [
         githubUrl: "https://github.com/pascalcyusa/portfolio2",
         content: "A modern, responsive portfolio website that features a clean and user-friendly design.",
         images: [
-            { url: "/images/personal-website/img3.png", caption: "Homepage design" },
-            { url: "/images/personal-website/img4.png", caption: "Portfolio section" }
+            { url: "/images/personal-website/img3.jpeg", caption: "Homepage design" },
+            { url: "/images/personal-website/img4.jpeg", caption: "Portfolio section" }
         ],
         technicalDetails: [
             "Frontend Stack: Built with React and TypeScript for a robust, modern foundation.",

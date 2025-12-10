@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import FooterWrapper from "@/components/FooterWrapper";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <FooterWrapper />
       </body>
     </html>
   );

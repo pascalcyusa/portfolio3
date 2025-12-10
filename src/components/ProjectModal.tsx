@@ -3,12 +3,14 @@
 import { Project } from "@/data/projects";
 import { ResearchItem } from "@/data/research";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { X, ChevronLeft, ChevronRight, Github, FileText } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 
 interface ProjectModalProps {
     project: Project | ResearchItem;
     onClose: () => void;
+    onNext?: () => void;
+    onPrev?: () => void;
 }
 
 const getYoutubeEmbedUrl = (url: string) => {
@@ -35,8 +37,26 @@ const getYoutubeEmbedUrl = (url: string) => {
     }
 };
 
-export default function ProjectModal({ project, onClose }: ProjectModalProps) {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+export default function ProjectModal({ project, onClose, onNext, onPrev }: ProjectModalProps) {
+    const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+
+    // Combine images and videos for the carousel
+    const images = project.images || [{ url: project.image, caption: project.title }];
+    const videos = project.videos || [];
+
+    // Create a unified media list: Videos first (optional preference) or mixed? 
+    // Let's put images first then videos to match typical galleries, or videos first if they are feature.
+    // The user said "half ... showing images ... and videos". 
+    // Let's treat them as a single slide deck.
+    const mediaItems = [
+        ...images.map(img => ({ type: 'image' as const, ...img })),
+        ...videos.map(vid => ({ type: 'video' as const, ...vid }))
+    ];
+
+    // Reset media index when project changes
+    useEffect(() => {
+        setCurrentMediaIndex(0);
+    }, [project.id]);
 
     // Prevent background scrolling when modal is open
     useEffect(() => {
@@ -46,195 +66,233 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         };
     }, []);
 
-    const images = project.images && project.images.length > 0
-        ? project.images
-        : [{ url: project.image, caption: project.title }];
+    // Keyboard Navigation
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") onClose();
+            if (e.key === "ArrowRight") onNext?.();
+            if (e.key === "ArrowLeft") onPrev?.();
+        };
 
-    const nextImage = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [onClose, onNext, onPrev]);
+
+
+    const nextMedia = (e?: React.MouseEvent) => {
+        e?.stopPropagation();
+        setCurrentMediaIndex((prev) => (prev + 1) % mediaItems.length);
     };
 
-    const prevImage = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    const prevMedia = (e?: React.MouseEvent) => {
+        e?.stopPropagation();
+        setCurrentMediaIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
     };
 
-    // Cast specific fields based on check, or assume optional for both
+    // Ensure index is valid
+    const safeIndex = currentMediaIndex >= mediaItems.length ? 0 : currentMediaIndex;
+    const currentMedia = mediaItems[safeIndex];
+    if (!currentMedia) return null;
+
+    // Data Helpers
     const outcomes = (project as Project).outcomes || (project as ResearchItem).achievements;
     const githubUrl = (project as Project).githubUrl;
-    const pdfUrl = (project as ResearchItem).pdfUrl; // also in Project but check first
-    // Technical details
-    const technicalDetails = (project as Project).technicalDetails; // Research might not have this populated yet but if it does it's fine
+    const pdfUrl = (project as ResearchItem).pdfUrl;
+    const technicalDetails = (project as Project).technicalDetails;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" onClick={onClose}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md animate-in fade-in duration-200" onClick={onClose}>
+
+            {/* Navigation Arrows (External / Floating) */}
+            {onPrev && (
+                <button
+                    onClick={(e) => { e.stopPropagation(); onPrev(); }}
+                    className="fixed left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 hidden md:block"
+                    aria-label="Previous Project"
+                >
+                    <ChevronLeft size={48} />
+                </button>
+            )}
+            {onNext && (
+                <button
+                    onClick={(e) => { e.stopPropagation(); onNext(); }}
+                    className="fixed right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 hidden md:block"
+                    aria-label="Next Project"
+                >
+                    <ChevronRight size={48} />
+                </button>
+            )}
+
+            {/* Modal Container */}
             <div
-                className="bg-brand-black border-2 border-brand-orange w-full max-w-5xl max-h-[90vh] overflow-y-auto relative flex flex-col"
+                className="bg-brand-black w-full max-w-6xl h-[85vh] md:h-[80vh] relative flex flex-col md:grid md:grid-cols-2 rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Close Button */}
-                <button
-                    onClick={onClose}
-                    className="absolute top-4 right-4 z-10 text-brand-white hover:text-brand-orange transition-colors"
-                >
-                    <X size={32} />
-                </button>
-
-                <div className="p-6 md:p-10">
-                    <h2 className="font-display text-3xl md:text-5xl uppercase text-brand-orange mb-2">{project.title}</h2>
-                    <p className="font-sans text-gray-400 mb-8 uppercase tracking-widest text-sm">{project.category}</p>
-
-                    {/* Image Gallery */}
-                    <div className="relative w-full h-[40vh] md:h-[60vh] bg-gray-900 mb-8 border border-gray-800 group">
-                        <Image
-                            src={images[currentImageIndex].url}
-                            alt={images[currentImageIndex].caption || project.title}
-                            fill
-                            className="object-contain"
-                        />
-
-                        {images.length > 1 && (
-                            <>
-                                <button
-                                    onClick={prevImage}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-colors opacity-0 group-hover:opacity-100"
-                                >
-                                    <ChevronLeft size={24} />
-                                </button>
-                                <button
-                                    onClick={nextImage}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-colors opacity-0 group-hover:opacity-100"
-                                >
-                                    <ChevronRight size={24} />
-                                </button>
-                            </>
-                        )}
-
-                        {images[currentImageIndex].caption && (
-                            <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-2 text-center text-sm text-gray-300">
-                                {images[currentImageIndex].caption}
-                            </div>
-                        )}
+                {/* Close Button & Header Navigation (Mobile) */}
+                <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+                    <div className="flex md:hidden gap-4 mr-4">
+                        {onPrev && <button onClick={onPrev} className="text-white hover:text-brand-orange"><ChevronLeft size={24} /></button>}
+                        {onNext && <button onClick={onNext} className="text-white hover:text-brand-orange"><ChevronRight size={24} /></button>}
                     </div>
+                    <button
+                        onClick={onClose}
+                        className="bg-black/50 hover:bg-brand-orange text-white rounded-full p-2 transition-colors"
+                    >
+                        <X size={20} />
+                    </button>
+                </div>
 
-                    {/* Videos Section */}
-                    {project.videos && project.videos.length > 0 && (
-                        <div className="mb-8">
-                            <h3 className="font-display text-xl uppercase text-brand-white mb-4">Videos</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {project.videos.map((video, index) => {
-                                    const embedUrl = getYoutubeEmbedUrl(video.url);
-                                    return (
-                                        <div key={index} className="space-y-2">
-                                            <div className="aspect-video bg-gray-900 border border-gray-800 relative">
-                                                {embedUrl ? (
-                                                    <iframe
-                                                        src={embedUrl}
-                                                        className="absolute inset-0 w-full h-full"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                        allowFullScreen
-                                                    />
-                                                ) : (
-                                                    <div className="flex items-center justify-center w-full h-full text-gray-500">
-                                                        <a href={video.url} target="_blank" rel="noopener noreferrer" className="hover:text-brand-orange underline">
-                                                            View Video
-                                                        </a>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            {video.caption && <p className="text-gray-400 text-sm italic text-center">{video.caption}</p>}
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                {/* Left Column: Media */}
+                <div className="relative h-[40%] md:h-full bg-black flex items-center justify-center group">
+                    {currentMedia.type === 'image' ? (
+                        <div className="relative w-full h-full">
+                            <Image
+                                src={currentMedia.url}
+                                alt={currentMedia.caption || project.title}
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent md:hidden" />
+                        </div>
+                    ) : (
+                        <div className="relative w-full h-full bg-black">
+                            {getYoutubeEmbedUrl(currentMedia.url) ? (
+                                <iframe
+                                    src={getYoutubeEmbedUrl(currentMedia.url)!}
+                                    className="w-full h-full"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            ) : (
+                                <div className="flex items-center justify-center h-full text-white">
+                                    <a href={currentMedia.url} target="_blank" className="underline">View Video</a>
+                                </div>
+                            )}
                         </div>
                     )}
 
-                    {/* Content */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                        <div className="md:col-span-2 space-y-8">
-                            <div>
-                                <h3 className="font-display text-xl uppercase text-brand-white mb-4">Overview</h3>
-                                <p className="font-sans text-gray-300 leading-relaxed whitespace-pre-wrap">
-                                    {project.content || project.description}
-                                </p>
-                            </div>
-
-                            {technicalDetails && (
-                                <div>
-                                    <h3 className="font-display text-xl uppercase text-brand-white mb-4">Technical Details</h3>
-                                    <ul className="list-disc list-inside space-y-2 text-gray-400 font-sans text-sm">
-                                        {technicalDetails.map((detail, i) => (
-                                            <li key={i}>{detail}</li>
-                                        ))}
-                                    </ul>
+                    {/* Media Navigation */}
+                    {mediaItems.length > 1 && (
+                        <>
+                            <button onClick={prevMedia} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange opacity-0 group-hover:opacity-100 transition-opacity">
+                                <ChevronLeft size={20} />
+                            </button>
+                            <button onClick={nextMedia} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange opacity-0 group-hover:opacity-100 transition-opacity">
+                                <ChevronRight size={20} />
+                            </button>
+                            {/* Caption Overlay */}
+                            {currentMedia.caption && (
+                                <div className="absolute bottom-4 left-0 right-0 text-center px-4">
+                                    <span className="bg-black/60 text-white text-xs py-1 px-3 rounded-full backdrop-blur-sm">
+                                        {currentMedia.caption}
+                                    </span>
                                 </div>
                             )}
+                        </>
+                    )}
+                </div>
 
-                            {(project as Project).challenges && (
-                                <div>
-                                    <h3 className="font-display text-xl uppercase text-brand-white mb-4">Challenges</h3>
-                                    <ul className="list-disc list-inside space-y-2 text-gray-400 font-sans text-sm">
-                                        {(project as Project).challenges!.map((item, i) => (
-                                            <li key={i}>{item}</li>
-                                        ))}
-                                    </ul>
-                                </div>
+                {/* Right Column: Content */}
+                <div className="h-[60%] md:h-full overflow-y-auto p-6 md:p-10 bg-brand-black md:border-l border-white/10 custom-scrollbar">
+
+                    {/* Header */}
+                    <div className="mb-8">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="text-gray-400 text-xs font-bold uppercase tracking-widest">
+                                {project.category}
+                            </span>
+                            {/* Date or other meta can go here */}
+                            {(project as ResearchItem).period && (
+                                <span className="text-gray-500 text-xs border border-gray-700 px-2 py-0.5 rounded">
+                                    {(project as ResearchItem).period}
+                                </span>
                             )}
                         </div>
 
-                        <div className="space-y-8">
-                            {outcomes && (
-                                <div className="bg-gray-900 p-6 border-l-2 border-brand-orange">
-                                    <h3 className="font-display text-lg uppercase text-brand-white mb-4">
-                                        {(project as Project).outcomes ? "Key Outcomes" : "Achievements"}
-                                    </h3>
-                                    <ul className="space-y-3 text-gray-400 font-sans text-sm">
-                                        {outcomes.map((item, i) => (
-                                            <li key={i} className="flex gap-2">
-                                                <span className="text-brand-orange">•</span>
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
+                        <h2 className="font-display text-3xl md:text-4xl text-white mb-2 leading-tight">
+                            {project.title}
+                        </h2>
 
-                            {(project as Project).futureImprovements && (
-                                <div>
-                                    <h3 className="font-display text-lg uppercase text-brand-white mb-4">Future Improvements</h3>
-                                    <ul className="space-y-2 text-gray-400 font-sans text-sm">
-                                        {(project as Project).futureImprovements!.map((item, i) => (
-                                            <li key={i}>- {item}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
+                        {(project as ResearchItem).lab && (
+                            <h3 className="font-sans text-brand-orange text-sm font-bold uppercase tracking-wider mb-4">
+                                {(project as ResearchItem).lab}
+                            </h3>
+                        )}
 
-                            {githubUrl && (
-                                <a
-                                    href={githubUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block w-full text-center border-2 border-brand-white py-3 font-bold uppercase hover:bg-brand-white hover:text-brand-black transition-colors"
-                                >
-                                    View on GitHub
-                                </a>
-                            )}
-
-                            {pdfUrl && (
-                                <a
-                                    href={pdfUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block w-full text-center border-2 border-brand-white py-3 font-bold uppercase hover:bg-brand-white hover:text-brand-black transition-colors"
-                                >
-                                    View PDF / Paper
-                                </a>
-                            )}
-                        </div>
+                        <div className="w-12 h-1 bg-brand-orange/50 mt-6" />
                     </div>
+
+                    {/* Main Content */}
+                    <div className="space-y-8 font-sans text-gray-300 leading-relaxed text-sm md:text-base">
+                        <p className="whitespace-pre-wrap">
+                            {project.content || project.description}
+                        </p>
+
+                        {/* Tech Details or Overview list */}
+                        {technicalDetails && (
+                            <div>
+                                <h4 className="font-bold text-white text-sm uppercase mb-3">Technical Details</h4>
+                                <ul className="list-disc list-inside space-y-1 text-gray-400">
+                                    {technicalDetails.map((d, i) => <li key={i}>{d}</li>)}
+                                </ul>
+                            </div>
+                        )}
+
+                        {/* Challenges */}
+                        {(project as Project).challenges && (
+                            <div>
+                                <h4 className="font-bold text-white text-sm uppercase mb-3">Challenges</h4>
+                                <ul className="list-disc list-inside space-y-1 text-gray-400">
+                                    {(project as Project).challenges!.map((d, i) => <li key={i}>{d}</li>)}
+                                </ul>
+                            </div>
+                        )}
+
+
+                        {/* Outcomes / Key Stats */}
+                        {outcomes && (
+                            <div className="bg-white/5 rounded-lg p-5 border border-white/10">
+                                <h4 className="font-bold text-white text-sm uppercase mb-3 text-center">
+                                    {(project as Project).outcomes ? "Key Outcomes" : "Achievements"}
+                                </h4>
+                                <ul className="space-y-2">
+                                    {outcomes.map((item, i) => (
+                                        <li key={i} className="flex gap-2 text-sm">
+                                            <span className="text-brand-orange font-bold">✓</span>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Footer Actions */}
+                    <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4">
+                        {githubUrl && (
+                            <a
+                                href={githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center gap-2 bg-[#24292e] hover:bg-[#2f363d] text-white py-3 px-4 rounded-lg transition-colors font-bold text-sm uppercase"
+                            >
+                                <Github size={18} />
+                                View on GitHub
+                            </a>
+                        )}
+                        {pdfUrl && (
+                            <a
+                                href={pdfUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center gap-2 bg-brand-orange hover:bg-orange-600 text-white py-3 px-4 rounded-lg transition-colors font-bold text-sm uppercase"
+                            >
+                                <FileText size={18} />
+                                Read Paper
+                            </a>
+                        )}
+                    </div>
+
                 </div>
             </div>
         </div>

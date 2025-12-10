@@ -3,7 +3,7 @@ import Image from "next/image";
 import { researchData } from "@/data/research";
 import ProjectCard from "./ProjectCard";
 
-export default function ResearchProcess() {
+export default function SelectedResearch() {
     const featuredResearch = researchData.slice(0, 3);
 
     return (
@@ -15,11 +15,8 @@ export default function ResearchProcess() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {featuredResearch.map((item, index) => {
-                        // Create a slug for the ID
-                        const slug = item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-
                         return (
-                            <Link key={index} href={`/research#${slug}`} className="w-full" aria-label={`View research: ${item.title}`}>
+                            <Link key={index} href={`/research?id=${item.id}`} className="w-full" aria-label={`View research: ${item.title}`}>
                                 <ProjectCard
                                     title={item.title}
                                     subtitle={item.lab}

@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
 import SelectedProjects from "@/components/SelectedProjects";
-import ResearchProcess from "@/components/ResearchProcess";
+import SelectedResearch from "@/components/SelectedResearch";
 import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 
@@ -9,7 +9,7 @@ export default function Home() {
     <main className="bg-brand-black min-h-screen">
       <Hero />
       <SelectedProjects />
-      <ResearchProcess />
+      <SelectedResearch />
       <Skills />
       <Footer />
     </main>

@@ -86,8 +86,19 @@ function ProjectsContent() {
             {/* Project Modal */}
             {selectedProject && (
                 <ProjectModal
+                    key={selectedProject.id}
                     project={selectedProject}
                     onClose={() => setSelectedProject(null)}
+                    onNext={() => {
+                        const currentIndex = filteredProjects.findIndex(p => p.id === selectedProject.id);
+                        const nextIndex = (currentIndex + 1) % filteredProjects.length;
+                        setSelectedProject(filteredProjects[nextIndex]);
+                    }}
+                    onPrev={() => {
+                        const currentIndex = filteredProjects.findIndex(p => p.id === selectedProject.id);
+                        const prevIndex = (currentIndex - 1 + filteredProjects.length) % filteredProjects.length;
+                        setSelectedProject(filteredProjects[prevIndex]);
+                    }}
                 />
             )}
         </main>

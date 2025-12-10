@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    // @ts-expect-error: allowedDevOrigins is valid but not in types yet
-    allowedDevOrigins: ["10.243.72.100:3000"],
-  },
   images: {
     remotePatterns: [
       {

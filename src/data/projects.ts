@@ -655,7 +655,7 @@ export const projects: Project[] = [
             "User-Friendly Interface: Intuitive navigation and a smooth Browse experience.",
         ],
         year: "Sept 2022",
-        githubUrl: "https://github.com/pascalcyusa/portfolio2",
+        githubUrl: "https://github.com/pascalcyusa/portfolio3",
         content: "A modern, responsive portfolio website that features a clean and user-friendly design.",
         images: [
             { url: "/images/personal-website/img3.webp", caption: "Homepage design" },

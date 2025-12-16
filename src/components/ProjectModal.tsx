@@ -4,7 +4,7 @@ import { Project } from "@/data/projects";
 import { ResearchItem } from "@/data/research";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Github, FileText, Maximize2 } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface ProjectModalProps {
     project: Project | ResearchItem;
@@ -40,8 +40,8 @@ const getYoutubeEmbedUrl = (url: string) => {
 export default function ProjectModal({ project, onClose, onNext, onPrev }: ProjectModalProps) {
     const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
     const [isFullScreen, setIsFullScreen] = useState(false);
-    const [touchStart, setTouchStart] = useState<number | null>(null);
-    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const touchStartRef = useRef<number | null>(null);
+    const touchEndRef = useRef<number | null>(null);
 
     // Combine images and videos for the carousel
     const images = project.images || [{ url: project.image, caption: project.title }];
@@ -97,18 +97,18 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
     const minSwipeDistance = 50;
 
     const onTouchStart = (e: React.TouchEvent) => {
-        setTouchEnd(null); // Reset touchEnd
-        setTouchStart(e.targetTouches[0].clientX);
+        touchEndRef.current = null; // Reset touchEnd
+        touchStartRef.current = e.targetTouches[0].clientX;
     };
 
     const onTouchMove = (e: React.TouchEvent) => {
-        setTouchEnd(e.targetTouches[0].clientX);
+        touchEndRef.current = e.targetTouches[0].clientX;
     };
 
     const onTouchEnd = () => {
-        if (!touchStart || !touchEnd) return;
+        if (!touchStartRef.current || !touchEndRef.current) return;
         
-        const distance = touchStart - touchEnd;
+        const distance = touchStartRef.current - touchEndRef.current;
         const isLeftSwipe = distance > minSwipeDistance;
         const isRightSwipe = distance < -minSwipeDistance;
 
@@ -117,6 +117,10 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
         } else if (isRightSwipe) {
             prevMedia();
         }
+
+        // Reset touch state
+        touchStartRef.current = null;
+        touchEndRef.current = null;
     };
 
     // Ensure index is valid

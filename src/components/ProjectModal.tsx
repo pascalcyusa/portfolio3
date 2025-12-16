@@ -4,7 +4,7 @@ import { Project } from "@/data/projects";
 import { ResearchItem } from "@/data/research";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Github, FileText, Maximize2 } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface ProjectModalProps {
     project: Project | ResearchItem;
@@ -40,6 +40,8 @@ const getYoutubeEmbedUrl = (url: string) => {
 export default function ProjectModal({ project, onClose, onNext, onPrev }: ProjectModalProps) {
     const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
     const [isFullScreen, setIsFullScreen] = useState(false);
+    const touchStartRef = useRef<number | null>(null);
+    const touchEndRef = useRef<number | null>(null);
 
     // Combine images and videos for the carousel
     const images = project.images || [{ url: project.image, caption: project.title }];
@@ -89,6 +91,36 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
     const prevMedia = (e?: React.MouseEvent) => {
         e?.stopPropagation();
         setCurrentMediaIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
+    };
+
+    // Minimum swipe distance (in px) to be considered a swipe
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e: React.TouchEvent) => {
+        touchEndRef.current = null; // Reset touchEnd
+        touchStartRef.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchMove = (e: React.TouchEvent) => {
+        touchEndRef.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStartRef.current || !touchEndRef.current) return;
+        
+        const distance = touchStartRef.current - touchEndRef.current;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            nextMedia();
+        } else if (isRightSwipe) {
+            prevMedia();
+        }
+
+        // Reset touch state
+        touchStartRef.current = null;
+        touchEndRef.current = null;
     };
 
     // Ensure index is valid
@@ -145,7 +177,12 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                 </div>
 
                 {/* Left Column: Media */}
-                <div className="relative h-[40%] md:h-full bg-black flex items-center justify-center group">
+                <div 
+                    className="relative h-[40%] md:h-full bg-black flex items-center justify-center group"
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
+                >
                     <div
                         className="relative w-full h-full cursor-zoom-in"
                         onClick={() => setIsFullScreen(true)}
@@ -190,10 +227,10 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                     {/* Media Navigation */}
                     {mediaItems.length > 1 && (
                         <>
-                            <button onClick={prevMedia} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onClick={prevMedia} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-opacity md:opacity-0 md:group-hover:opacity-100">
                                 <ChevronLeft size={20} />
                             </button>
-                            <button onClick={nextMedia} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onClick={nextMedia} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-opacity md:opacity-0 md:group-hover:opacity-100">
                                 <ChevronRight size={20} />
                             </button>
                             {/* Caption Overlay */}

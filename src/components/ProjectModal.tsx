@@ -5,6 +5,7 @@ import { ResearchItem } from "@/data/research";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Github, FileText, Maximize2 } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useTouchDevice } from "@/hooks/useTouchDevice";
 
 interface ProjectModalProps {
     project: Project | ResearchItem;
@@ -42,6 +43,7 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
     const [isFullScreen, setIsFullScreen] = useState(false);
     const touchStartRef = useRef<number | null>(null);
     const touchEndRef = useRef<number | null>(null);
+    const isTouchDevice = useTouchDevice();
 
     // Combine images and videos for the carousel
     const images = project.images || [{ url: project.image, caption: project.title }];
@@ -227,10 +229,20 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                     {/* Media Navigation */}
                     {mediaItems.length > 1 && (
                         <>
-                            <button onClick={prevMedia} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-opacity md:opacity-0 md:group-hover:opacity-100">
+                            <button 
+                                onClick={prevMedia} 
+                                className={`absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-all ${
+                                    isTouchDevice ? 'opacity-100' : 'md:opacity-0 md:group-hover:opacity-100'
+                                }`}
+                            >
                                 <ChevronLeft size={20} />
                             </button>
-                            <button onClick={nextMedia} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-opacity md:opacity-0 md:group-hover:opacity-100">
+                            <button 
+                                onClick={nextMedia} 
+                                className={`absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-brand-orange transition-all ${
+                                    isTouchDevice ? 'opacity-100' : 'md:opacity-0 md:group-hover:opacity-100'
+                                }`}
+                            >
                                 <ChevronRight size={20} />
                             </button>
                             {/* Caption Overlay */}

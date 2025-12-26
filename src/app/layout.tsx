@@ -29,10 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body
+        className={`${syne.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground font-sans`}
+      >
         {/* Google tag (gtag.js) */}
         <Script
-          async
           src="https://www.googletagmanager.com/gtag/js?id=G-05F6NDMGS2"
           strategy="afterInteractive"
         />
@@ -44,10 +45,6 @@ export default function RootLayout({
             gtag('config', 'G-05F6NDMGS2');
           `}
         </Script>
-      </head>
-      <body
-        className={`${syne.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground font-sans`}
-      >
         <Navbar />
         {children}
         <FooterWrapper />

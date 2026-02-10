@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Mail, Linkedin, Github } from "lucide-react";
+import { trackEvent } from "@/utils/analytics";
 
 export default function Footer() {
     return (
@@ -19,7 +22,11 @@ export default function Footer() {
                 </div>
 
                 <div className="flex gap-6">
-                    <a href="mailto:cyusashyakapascal@gmail.com" className="w-10 h-10 bg-brand-black rounded-full flex items-center justify-center text-brand-white hover:bg-brand-white hover:text-brand-black transition-colors">
+                    <a href="mailto:cyusashyakapascal@gmail.com" onClick={() => trackEvent({
+                        action: 'click_email',
+                        category: 'Contact',
+                        label: 'Footer Email Link'
+                    })} className="w-10 h-10 bg-brand-black rounded-full flex items-center justify-center text-brand-white hover:bg-brand-white hover:text-brand-black transition-colors">
                         <Mail size={20} />
                     </a>
                     <a href="https://linkedin.com/in/pascal-cyusa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-brand-black rounded-full flex items-center justify-center text-brand-white hover:bg-brand-white hover:text-brand-black transition-colors">

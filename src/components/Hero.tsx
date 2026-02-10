@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { trackEvent } from "@/utils/analytics";
 
 export default function Hero() {
     return (
@@ -66,6 +69,11 @@ export default function Hero() {
                     <div className="flex items-center gap-6">
                         <Link
                             href="/resume"
+                            onClick={() => trackEvent({
+                                action: 'view_resume',
+                                category: 'Engagement',
+                                label: 'Hero Resume Link'
+                            })}
                             className="group flex items-center gap-2 text-brand-white hover:text-brand-orange transition-colors"
                         >
                             <span className="font-sans text-sm tracking-widest uppercase border-b border-brand-orange pb-1">

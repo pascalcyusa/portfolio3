@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { trackEvent } from "@/utils/analytics";
 
 export default function ContactPage() {
     return (
@@ -19,7 +22,11 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                     <div className="bg-gray-900 p-8 border-2 border-brand-white hover:border-brand-orange transition-colors">
                         <h3 className="font-display text-2xl uppercase mb-4">Email</h3>
-                        <a href="mailto:cyusashyakapascal@gmail.com" className="text-brand-orange hover:text-white break-all">
+                        <a href="mailto:cyusashyakapascal@gmail.com" onClick={() => trackEvent({
+                            action: 'click_email',
+                            category: 'Contact',
+                            label: 'Contact Page Email Link'
+                        })} className="text-brand-orange hover:text-white break-all">
                             cyusashyakapascal@gmail.com
                         </a>
                     </div>

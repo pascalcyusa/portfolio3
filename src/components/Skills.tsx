@@ -5,12 +5,12 @@ export default function Skills() {
         {
             title: "Technical",
             skills: [
-                "CAD",
-                "FEA",
+                "CAD (SolidWorks, Onshape)",
+                "FEA (COMSOL)",
                 "3D Printing",
                 "Laser Cutting",
                 "Soldering",
-                "PCB Design",
+                "PCB Design (KiCad)",
                 "GD&T",
                 "ROS 2"
             ]
@@ -20,11 +20,24 @@ export default function Skills() {
             skills: [
                 "Python",
                 "C/C++",
-                "MATLAB",
-                "LabVIEW",
+                "TypeScript",
                 "JavaScript",
                 "React",
-                "HTML/CSS"
+                "FastAPI",
+                "PostgreSQL",
+                "HTML/CSS",
+                "MATLAB",
+                "LabVIEW"
+            ]
+        },
+        {
+            title: "Platforms & Tools",
+            skills: [
+                "Google Cloud Platform (GCP)",
+                "Docker",
+                "Netlify",
+                "GitHub Actions",
+                "Linux"
             ]
         }
     ];

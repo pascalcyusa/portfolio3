@@ -24,13 +24,13 @@ export const researchData: ResearchItem[] = [
         category: "MEMS / Sensors",
         lab: "Microscale Sensors and Systems Lab",
         image: "/images/tdk-ch101/img1.webp",
-        description: "The Microscale Sensors and Systems Lab is a state of the art lab at Tufts that focuses on the design, fabrication, and testing of microscale sensors and systems. My research area has been on the development of a miniature ultrasonic anemometer using the TDK CH101 sensor. This has potential applications in Navy high-altitude UAVs, and low-pressure environments on Mars.",
+        description: "Retrofitting the wind tunnel test section with pressure taps and a pitot-static tube to unlock real-time flow velocity/total pressure data while advancing a miniature ultrasonic anemometer for UAV and Mars applications.",
         overview: [
-            "Distance measurements within ± 0.1878 mm error margin",
-            "Wind velocity measurements at ± 0.6454 m/s accuracy",
-            "Working towards ±0.05 m/s wind velocity accuracy"
+            "Retrofitting the wind tunnel test section with differential pressure taps and a pitot-static tube for precise, real-time flow monitoring.",
+            "Developing experimental protocols to push wind velocity accuracy beyond the ±0.05 m/s target set in prior work.",
+            "Tested TDK CH101 ultrasonic sensor anemometer achieving ±0.19 mm distance error and ±0.65 m/s wind velocity error, informing next-phase calibration."
         ],
-        period: "Jun 2024 - Present",
+        period: "Sep 2025 - Present; Jun 2024 - Aug 2024",
         link: "https://sites.tufts.edu/senselab/research/#:~:text=Miniaturized%20Ultrasonic%20Anemometer",
         content: "The Microscale Sensors and Systems Lab is a state of the art lab at Tufts that focuses on the design, fabrication, and testing of microscale sensors and systems. My research has area has been on the development of a miniature ultrasonic anemometer using the TDK CH101 sensor. This has potential applications in Navy high-altitude UAVs, and low-pressure environments on Mars.",
         images: [
@@ -40,9 +40,9 @@ export const researchData: ResearchItem[] = [
             }
         ],
         achievements: [
-            "Distance measurements within ± 0.1878 mm error margin",
-            "Wind velocity measurements at ± 0.6454 m/s accuracy",
-            "Working towards ±0.05 m/s wind velocity accuracy"
+            "Wind tunnel instrumentation upgrade with differential pressure taps and pitot-static tube for higher-fidelity measurements.",
+            "Established path to surpass ±0.05 m/s velocity accuracy through improved protocols and calibration routines.",
+            "Built C/LabVIEW data collection and MATLAB/Python analysis pipeline validating ±0.19 mm distance and ±0.65 m/s wind velocity error on TDK CH101 anemometer tests."
         ],
         pdfUrl: "https://tuftscloud-my.sharepoint.com/:b:/g/personal/jcyusa01_tufts_edu/EQ3-R-EdM6tPplHGKzaGvvkB7qgCPYrTeh75C466yeMHew?e=L1lMAA"
     },

@@ -22,22 +22,68 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        id: "ml-hand-gesture-app",
+        title: "ML Hand Gesture App",
+        category: "Full-Stack / ML",
+        image: "/images/artefacts/5.webp",
+        description: "Privacy-first web app that lets users train custom hand-gesture models in-browser and control connected devices in real time.",
+        overview: [
+            "Architected a full-stack TypeScript/Python experience where users train gesture models entirely in the browser via webcam.",
+            "Added an interactive piano player and Bluetooth control for LEGO Spike Prime motors driven by real-time gesture recognition.",
+            "Deployed with serverless PostgreSQL (Neon), a Dockerized FastAPI backend on Google Cloud Run, and a responsive React frontend on Netlify.",
+            "Maintained a CI/CD pipeline with GitHub Actions and Google Cloud Build while keeping all camera data and model training client-side for privacy."
+        ],
+        year: "Jun 2025 - Present",
+        content: "A full-stack application that prioritizes user privacy by keeping all gesture data and model training on-device while still providing rich device control through Bluetooth and an interactive piano feature.",
+        technicalDetails: [
+            "Client-side model training with TensorFlow.js",
+            "FastAPI backend (Docker) on Google Cloud Run",
+            "Serverless PostgreSQL (Neon) for metadata",
+            "React + TypeScript frontend deployed on Netlify",
+            "Bluetooth control for LEGO Spike Prime motors"
+        ],
+        outcomes: [
+            "Delivered a privacy-first gesture training workflow without server-side image handling.",
+            "Enabled real-time gesture-driven interactions for both web UI and Bluetooth-connected devices."
+        ]
+    },
+    {
+        id: "drone-payload-reduction",
+        title: "Drone Payload Reduction (BAE Systems)",
+        category: "Senior Capstone",
+        image: "/images/artefacts/6.webp",
+        description: "Designed integrated PCB drone arms with BAE Systems to reduce wiring mass and extend flight time.",
+        overview: [
+            "Designed integrated PCB drone arms in SolidWorks and Onshape with BAE Systems, reducing wiring mass and increasing flight time by ~135%.",
+            "Created PCB layouts in KiCad, hand-soldered prototypes, and performed COMSOL FEA plus thermal analysis to satisfy ISO 24352 requirements.",
+            "Fabricated modular prototypes with TPU overmolding for vibration damping, achieving a ~10% reduction in total drone mass."
+        ],
+        year: "Fall 2025",
+        technicalDetails: [
+            "SolidWorks and Onshape CAD for PCB arm integration",
+            "KiCad PCB layout and hand-soldered prototypes",
+            "COMSOL FEA and thermal analysis for ISO 24352 compliance",
+            "TPU overmolding for vibration damping and modularity"
+        ],
+        outcomes: [
+            "Demonstrated lighter integrated arms that reduced wiring mass and extended flight time.",
+            "Validated structural and thermal performance against ISO 24352 criteria."
+        ]
+    },
+    {
         id: "pokemon-cafe",
         title: "Pokémon Cafe",
-        category: "ME35 / Simple Robotics",
+        category: "Robotics",
         image: "/images/pokemon-cafe/img3.webp",
-        description: "A completely automated system for cooking pancakes",
+        description: "Fully autonomous pancake delivery system on an iRobot Create3 using ROS 2, Airtable orders, IR sensors, and OpenCV station detection.",
         overview: [
-            "Connects to Airtable to retrieve new pancake orders.",
-            "Uses IR sensors to autonomously follow a designated path.",
-            "Identifies processing stations using OpenCV to detect green markers.",
-            "Visits cooking and topping stations based on the specific requirements of each order.",
-            "Reports robot arrival and order completion back to Airtable.",
-            "Acts as the transport element within a larger automated pancake production line (including batter, cooking, topping stages)."
+            "Built a ROS 2 state machine on an iRobot Create3 to shuttle pancake orders between production stations.",
+            "Implemented IR line-following with OpenCV color marker detection and sequential counting to identify stations.",
+            "Integrated Airtable API for real-time order intake and status updates, coordinating robot modes (moving, waiting, idle)."
         ],
         year: "Spring 2025",
         githubUrl: "https://github.com/pascalcyusa/Pokemon-Cafe",
-        content: "A completely automated system for cooking pancakes, featuring autonomous transport.",
+        content: "A fully autonomous transport robot that moves pancake orders through production stations, leveraging ROS 2, Airtable order syncing, and onboard sensing for reliable station detection.",
         images: [
             { url: "/images/pokemon-cafe/img1.webp", caption: "The Create 3 Robot at the whipped cream station" },
             { url: "/images/pokemon-cafe/img2.webp", caption: "The Create 3 Robot at the sprinkles station" },
@@ -48,16 +94,16 @@ export const projects: Project[] = [
             { url: "https://youtu.be/pDoqdQYS55g", caption: "Pokémon Cafe full run" }
         ],
         technicalDetails: [
-            "Software Tools: Used common software for robot control, computer vision, web communication, and interacting with the hardware.",
-            "Navigation Method: Followed a line on the floor using infrared sensors and spotted station locations using a camera looking for colored markers.",
-            "Finding Stations: Recognized stations by seeing colored markers and counting them in order along the path.",
-            "Getting Orders: Connected to Airtable to receive pancake orders and update the robot's progress.",
-            "Task Tracking: Kept track of what the robot was doing (like moving, waiting, or idle) using a simple internal system."
+            "ROS 2 state machine managing robot modes and routing between stations",
+            "IR sensors for line following paired with OpenCV color marker detection and sequential counting",
+            "Airtable API integration for order intake and status updates",
+            "Create 3 robot platform with camera vision for station identification",
+            "Real-time status synchronization between the robot and online order system"
         ],
         personalContribution: [
-            "Online Order System: Built the connection to Airtable so the robot could get orders and send back status updates.",
-            "Station Spotting: Programmed the robot's camera vision to recognize the colored markers identifying each station.",
-            "Line Following: Wrote the main code that allowed the robot to follow the line on the floor using its sensors and steer correctly."
+            "Built the Airtable integration for retrieving orders and sending back status updates.",
+            "Programmed camera vision to recognize colored station markers and count them for routing.",
+            "Developed line-following and navigation logic on the Create 3 platform."
         ],
         challenges: [
             "Reliable Station Identification: Relying only on color and counting made it tricky if the robot missed a marker.",
@@ -177,20 +223,18 @@ export const projects: Project[] = [
     },
     {
         id: "camera-line-follower",
-        title: "Traverse Victory Road",
-        category: "ME35 / Simple Robotics",
+        title: "Camera Line Follower Robot",
+        category: "Robotics",
         image: "/images/camera-line-follower/img1.webp",
-        description: "A line-following robot designed to navigate paths using a Pi Camera for line detection.",
+        description: "An autonomous Raspberry Pi robot that follows a line using OpenCV, with a Flask web server for remote control and PID-tuned motor response.",
         overview: [
-            "Uses computer vision (OpenCV) to detect and follow lines from a camera feed.",
-            "Controls two motors for autonomous robot movement (forward, backward, turns).",
-            "Processes camera input in real-time for navigation decisions.",
-            "Interfaces directly with Raspberry Pi hardware (GPIO) for motor control.",
-            "Includes visual debugging displays for monitoring performance."
+            "Designed an autonomous Raspberry Pi robot that follows a line using OpenCV image processing.",
+            "Built a Flask web server to add remote control capabilities for user-friendly operation.",
+            "Implemented PWM control and PID algorithms in C/C++ on a Linux-based Raspberry Pi, improving response time by 30%."
         ],
         year: "Spring 2025",
         githubUrl: "https://github.com/pascalcyusa/camera-line-follower",
-        content: "A line-following robot designed to navigate paths using a Pi Camera for line detection. ",
+        content: "An OpenCV-powered line follower on Raspberry Pi with a Flask web layer for remote control and PID-tuned motor response.",
         designProcess: "This project used computer vision to detect a black line on the floor with a Pi Camera. I used OpenCV for image processing and programmed a proportional controller to adjust steering based on the line's center. Early tests showed inconsistent performance due to lighting changes, so I adjusted the camera angle and image resolution. I also tested different thresholding techniques and created a simple line recovery system. Most of the debugging came from trying things over and over — watching the robot fail, and tweaking small parts of the code until it worked better.",
         images: [
             { url: "/images/camera-line-follower/img1.webp", caption: "Robot's side view" },
@@ -200,11 +244,11 @@ export const projects: Project[] = [
             { url: "https://www.youtube.com/watch?v=kxjFOwbjV9U", caption: "Video demonstration of the robot in action" }
         ],
         technicalDetails: [
-            "Developed in Python on a Raspberry Pi platform.",
-            "Libraries: OpenCV for image processing, RPi.GPIO for hardware control.",
-            "Core hardware: Raspberry Pi, PiCamera, motors, motor driver.",
-            "Control System: Simple proportional control based on the detected line's center position.",
-            "Motor Management: Controls speed via PWM and direction via digital signals."
+            "OpenCV-based line detection on Raspberry Pi",
+            "PWM motor control with PID tuning in C/C++",
+            "Flask web server enabling remote commands",
+            "GPIO-based motor driver integration",
+            "Real-time navigation loop for responsive corrections"
         ],
         challenges: [
             "Sensitivity to variations in ambient lighting and shadows — I used adaptive thresholding and filtering to stabilize detection.",
@@ -425,15 +469,14 @@ export const projects: Project[] = [
         title: "Dog Treat Dispenser",
         category: "ME40 / Engineering Design",
         image: "/images/dog-treat-dispenser/dispens1.webp",
-        description: "Designed a wheelchair-mounted dog treat dispenser for Ryan, a user with a spinal cord injury, ensuring minimal effort in dispensing and preventing unintended access by the dog.",
+        description: "Led the mechanical design of a wheelchair-integrated dog treat dispenser with DFM-driven reliability for a client with limited hand mobility.",
         overview: [
-            "User-friendly design requiring minimal effort",
-            "Secure dispensing mechanism for controlled treat release",
-            "Affordable and durable materials",
-            "Clamp-based attachment for easy wheelchair integration"
+            "Led mechanical design of a wheelchair-integrated dispenser applying DFM principles for reliability.",
+            "Developed SolidWorks 3D models and GD&T drawings to ensure precise manufacturing and easy wheelchair integration.",
+            "Optimized cost and usability through iterative 3D-printed and laser-cut prototypes."
         ],
         year: "Spring 2024",
-        content: "Designed a wheelchair-mounted dog treat dispenser for Ryan, a user with a spinal cord injury, ensuring minimal effort in dispensing and preventing unintended access by the dog.",
+        content: "Designed and delivered a wheelchair-mounted dog treat dispenser focused on low-effort activation, safe dispensing, and manufacturability.",
         images: [
             { url: "/images/dog-treat-dispenser/dispens1.webp", caption: "Final Assembly" },
             { url: "/images/dog-treat-dispenser/blueprint.webp", caption: "Blueprint of the dog treat dispenser" }
@@ -442,10 +485,10 @@ export const projects: Project[] = [
             { url: "https://youtube.com/shorts/POaRSqfHcnQ", caption: "Treat Dispenser in action" }
         ],
         technicalDetails: [
+            "SolidWorks modeling with GD&T drawings",
             "Mechanism design for low-force activation",
-            "3D printing for custom parts",
-            "Ergonomic analysis for user comfort",
-            "Safety features to prevent accidental dispensing"
+            "3D printing and laser cutting for rapid prototyping",
+            "DFM-driven material selection and assembly approach"
         ],
         challenges: [
             "Designing for limited hand dexterity",

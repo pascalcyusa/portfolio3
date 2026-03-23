@@ -2,7 +2,8 @@
 
 import { Suspense, useState, useEffect } from "react";
 import Image from "next/image";
-import { projects, Project } from "@/data/projects";
+import { projects as fallbackProjects, Project } from "@/data/projects";
+import { fetchProjects } from "@/utils/api";
 import ProjectModal from "@/components/ProjectModal";
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
@@ -10,29 +11,44 @@ import { ArrowLeft } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 function ProjectsContent() {
+    const [projectsData, setProjectsData] = useState<Project[]>(fallbackProjects);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const searchParams = useSearchParams();
     const router = useRouter();
 
+    useEffect(() => {
+        async function loadProjects() {
+            try {
+                const data = await fetchProjects();
+                if (data && data.length > 0) {
+                    setProjectsData(data);
+                }
+            } catch (err) {
+                console.error("Failed to fetch projects, using fallback.", err);
+            }
+        }
+        loadProjects();
+    }, []);
+
     // Handle deep linking via query param
     useEffect(() => {
         const projectId = searchParams.get("project");
-        if (projectId) {
-            const project = projects.find((p) => p.id === projectId);
+        if (projectId && projectsData.length > 0) {
+            const project = projectsData.find((p) => p.id === projectId);
             if (project) {
                 setSelectedProject(project);
             }
         }
-    }, [searchParams]);
+    }, [searchParams, projectsData]);
 
     // Get unique categories
-    const categories = Array.from(new Set(projects.map((p) => p.category)));
+    const categories = Array.from(new Set(projectsData.map((p) => p.category)));
 
     // Filter projects
     const filteredProjects = selectedCategory
-        ? projects.filter((p) => p.category === selectedCategory)
-        : projects;
+        ? projectsData.filter((p) => p.category === selectedCategory)
+        : projectsData;
 
     return (
         <main className="bg-brand-black min-h-screen text-brand-white p-8 pt-24">

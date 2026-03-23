@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
-import { projects } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
+import { Project } from "@/data/projects";
 
-export default function SelectedProjects() {
+export default function SelectedProjects({ projects }: { projects: Project[] }) {
     const featuredProjects = projects.slice(0, 3);
 
     return (

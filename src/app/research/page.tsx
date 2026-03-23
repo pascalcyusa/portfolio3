@@ -2,7 +2,8 @@
 
 import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
-import { researchData, ResearchItem } from "@/data/research";
+import { researchData as fallbackResearch, ResearchItem } from "@/data/research";
+import { fetchResearch } from "@/utils/api";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import ProjectModal from "@/components/ProjectModal";
@@ -10,18 +11,33 @@ import ProjectCard from "@/components/ProjectCard";
 import { useSearchParams } from "next/navigation";
 
 function ResearchContent() {
+    const [researchData, setResearchData] = useState<ResearchItem[]>(fallbackResearch);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedItem, setSelectedItem] = useState<ResearchItem | null>(null);
     const searchParams = useSearchParams();
 
+    useEffect(() => {
+        async function loadResearch() {
+            try {
+                const data = await fetchResearch();
+                if (data && data.length > 0) {
+                    setResearchData(data);
+                }
+            } catch (err) {
+                console.error("Failed to fetch research, using fallback.", err);
+            }
+        }
+        loadResearch();
+    }, []);
+
     // Handle deep linking
     useEffect(() => {
         const id = searchParams.get("id");
-        if (id) {
+        if (id && researchData.length > 0) {
             const item = researchData.find((r) => r.id === id);
             if (item) setSelectedItem(item);
         }
-    }, [searchParams]);
+    }, [searchParams, researchData]);
 
     // Get unique categories
     const categories = Array.from(new Set(researchData.map((item) => item.category)));

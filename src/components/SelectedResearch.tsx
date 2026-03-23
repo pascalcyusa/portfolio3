@@ -1,10 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
-import { researchData } from "@/data/research";
 import ProjectCard from "./ProjectCard";
+import { ResearchItem } from "@/data/research";
 
-export default function SelectedResearch() {
-    const featuredResearch = researchData.slice(0, 3);
+export default function SelectedResearch({ research }: { research: ResearchItem[] }) {
+    const featuredResearch = research.slice(0, 3);
 
     return (
         <section className="py-20 bg-brand-black text-brand-white px-4">

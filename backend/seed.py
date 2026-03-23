@@ -7,7 +7,7 @@ API_URL = "http://localhost:8080/api"
 
 def seed_projects():
     try:
-        with open("projects_seed.json", "r") as f:
+        with open("seed_data/projects_seed.json", "r") as f:
             projects = json.load(f)
 
         headers = {"X-API-Key": os.environ.get("ADMIN_API_KEY", "dev_api_key")}
@@ -22,7 +22,7 @@ def seed_projects():
 
 def seed_research():
     try:
-        with open("research_seed.json", "r") as f:
+        with open("seed_data/research_seed.json", "r") as f:
             research = json.load(f)
 
         headers = {"X-API-Key": os.environ.get("ADMIN_API_KEY", "dev_api_key")}

@@ -1,7 +1,6 @@
 "use client";
 
-import { Project } from "@/data/projects";
-import { ResearchItem } from "@/data/research";
+import { Project, ResearchItem } from "@/types";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Github, FileText, Maximize2 } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";

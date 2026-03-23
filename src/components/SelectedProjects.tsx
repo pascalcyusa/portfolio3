@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ProjectCard from "./ProjectCard";
-import { Project } from "@/data/projects";
+import { Project } from "@/types";
 
 export default function SelectedProjects({ projects }: { projects: Project[] }) {
     const featuredProjects = projects.slice(0, 3);

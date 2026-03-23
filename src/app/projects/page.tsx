@@ -1,9 +1,8 @@
 "use client";
 
 import { Suspense, useState, useEffect } from "react";
-import Image from "next/image";
-import { projects as fallbackProjects, Project } from "@/data/projects";
 import { fetchProjects } from "@/utils/api";
+import { Project } from "@/types";
 import ProjectModal from "@/components/ProjectModal";
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
@@ -11,9 +10,10 @@ import { ArrowLeft } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 function ProjectsContent() {
-    const [projectsData, setProjectsData] = useState<Project[]>(fallbackProjects);
+    const [projectsData, setProjectsData] = useState<Project[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [loading, setLoading] = useState(true);
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -21,11 +21,11 @@ function ProjectsContent() {
         async function loadProjects() {
             try {
                 const data = await fetchProjects();
-                if (data && data.length > 0) {
-                    setProjectsData(data);
-                }
+                if (data) setProjectsData(data);
             } catch (err) {
-                console.error("Failed to fetch projects, using fallback.", err);
+                console.error("Failed to fetch projects.", err);
+            } finally {
+                setLoading(false);
             }
         }
         loadProjects();
@@ -49,6 +49,17 @@ function ProjectsContent() {
     const filteredProjects = selectedCategory
         ? projectsData.filter((p) => p.category === selectedCategory)
         : projectsData;
+
+    if (loading) {
+        return (
+            <main className="bg-brand-black min-h-screen text-brand-white p-8 pt-24 flex justify-center items-center">
+                <div className="animate-pulse flex flex-col items-center">
+                    <div className="w-12 h-12 border-4 border-brand-orange border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-gray-400 uppercase tracking-widest text-sm">Loading projects...</p>
+                </div>
+            </main>
+        );
+    }
 
     return (
         <main className="bg-brand-black min-h-screen text-brand-white p-8 pt-24">

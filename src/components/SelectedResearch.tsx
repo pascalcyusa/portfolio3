@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ProjectCard from "./ProjectCard";
-import { ResearchItem } from "@/data/research";
+import { ResearchItem } from "@/types";
 
 export default function SelectedResearch({ research }: { research: ResearchItem[] }) {
     const featuredResearch = research.slice(0, 3);

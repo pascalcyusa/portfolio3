@@ -109,3 +109,18 @@ Once both frontend and backend are live, your frontend will likely fallback to t
 6. **Important:** Your images in the database still point to local paths (e.g., `/images/...`). You must upload your `public/images` folder to your new Google Cloud Storage bucket, and then update the image URLs in your Neon database to point to the new GCS public URLs (e.g., `https://storage.googleapis.com/my-portfolio-images/...`). You can do this manually via the FastAPI Swagger UI (`https://your-cloud-run-url/api/docs`).
 
 Congratulations! Your portfolio is now fully dynamic and scalable.
+
+### Automating Media Migration
+
+We have included a handy bash script to migrate your `public/images` folder to your new Google Cloud Storage bucket, and update your database seed files automatically!
+
+```bash
+# Provide the name of the bucket you created in Step 2
+./scripts/migrate_media.sh my-portfolio-images
+```
+This will:
+1. Upload all local images to GCS using `gsutil`.
+2. Make the bucket contents publicly viewable.
+3. Update your local `backend/seed_data/projects_seed.json` and `backend/seed_data/research_seed.json` so that they point to the new `https://storage.googleapis.com/my-portfolio-images/...` URLs instead of `/images/...`.
+
+After running the script, simply run `python backend/seed.py` (making sure `API_URL` points to your Cloud Run URL) to seed the database with the updated media links.

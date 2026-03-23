@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import Image from "next/image";
-import { researchData as fallbackResearch, ResearchItem } from "@/data/research";
 import { fetchResearch } from "@/utils/api";
+import { ResearchItem } from "@/types";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import ProjectModal from "@/components/ProjectModal";
@@ -11,20 +10,21 @@ import ProjectCard from "@/components/ProjectCard";
 import { useSearchParams } from "next/navigation";
 
 function ResearchContent() {
-    const [researchData, setResearchData] = useState<ResearchItem[]>(fallbackResearch);
+    const [researchData, setResearchData] = useState<ResearchItem[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedItem, setSelectedItem] = useState<ResearchItem | null>(null);
+    const [loading, setLoading] = useState(true);
     const searchParams = useSearchParams();
 
     useEffect(() => {
         async function loadResearch() {
             try {
                 const data = await fetchResearch();
-                if (data && data.length > 0) {
-                    setResearchData(data);
-                }
+                if (data) setResearchData(data);
             } catch (err) {
-                console.error("Failed to fetch research, using fallback.", err);
+                console.error("Failed to fetch research.", err);
+            } finally {
+                setLoading(false);
             }
         }
         loadResearch();
@@ -46,6 +46,17 @@ function ResearchContent() {
     const filteredData = selectedCategory
         ? researchData.filter((item) => item.category === selectedCategory)
         : researchData;
+
+    if (loading) {
+        return (
+            <main className="bg-brand-black min-h-screen text-brand-white p-8 pt-24 flex justify-center items-center">
+                <div className="animate-pulse flex flex-col items-center">
+                    <div className="w-12 h-12 border-4 border-brand-orange border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-gray-400 uppercase tracking-widest text-sm">Loading research...</p>
+                </div>
+            </main>
+        );
+    }
 
     return (
         <main className="bg-brand-black min-h-screen text-brand-white p-8 pt-24">

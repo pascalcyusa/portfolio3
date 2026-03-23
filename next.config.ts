@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img.youtube.com', // Often useful if using youtube thumbnails
       },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com', // Allow loading images from GCS
+      },
     ],
   },
 };

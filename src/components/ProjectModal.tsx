@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Github, FileText, Maximize2 } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useTouchDevice } from "@/hooks/useTouchDevice";
+import { toMediaUrl } from "@/utils/media";
 
 interface ProjectModalProps {
     project: Project | ResearchItem;
@@ -191,7 +192,7 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                         {currentMedia.type === 'image' ? (
                             <div className="relative w-full h-full">
                                 <Image
-                                    src={currentMedia.url}
+                                    src={toMediaUrl(currentMedia.url)}
                                     alt={currentMedia.caption || project.title}
                                     fill
                                     className="object-cover"
@@ -382,7 +383,7 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                         {currentMedia.type === 'image' ? (
                             <div className="relative w-full h-full">
                                 <Image
-                                    src={currentMedia.url}
+                                    src={toMediaUrl(currentMedia.url)}
                                     alt={currentMedia.caption || project.title}
                                     fill
                                     className="object-contain"

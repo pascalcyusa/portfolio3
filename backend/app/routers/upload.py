@@ -23,16 +23,24 @@ async def upload_file(file: UploadFile = File(...)):
     if not settings.GCS_BUCKET_NAME:
         raise HTTPException(status_code=500, detail="GCS_BUCKET_NAME not set in environment")
 
+    if file.content_type not in settings.allowed_upload_mime_types:
+        raise HTTPException(status_code=400, detail="Unsupported file type")
+
     bucket = storage_client.bucket(settings.GCS_BUCKET_NAME)
 
     # Create a unique filename
     ext = os.path.splitext(file.filename)[1]
     unique_filename = f"{uuid.uuid4()}{ext}"
 
-    blob = bucket.blob(unique_filename)
-
     # Read the file contents
     contents = await file.read()
+
+    max_upload_bytes = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
+    if len(contents) > max_upload_bytes:
+        raise HTTPException(status_code=400, detail=f"File too large (max {settings.MAX_UPLOAD_SIZE_MB}MB)")
+
+    blob = bucket.blob(unique_filename)
+    blob.cache_control = "public, max-age=31536000, immutable"
 
     # Upload the file
     blob.upload_from_string(contents, content_type=file.content_type)

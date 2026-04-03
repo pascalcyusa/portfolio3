@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check-package-manager": "if [ -f bun.lockb ]; then echo '✅ Using bun (correct)'; elif [ -f package-lock.json ]; then echo '❌ Using npm (wrong) - please switch to bun'; fi"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.8",

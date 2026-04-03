@@ -16,13 +16,16 @@ The backend handles API requests, database interactions, and Google Cloud Storag
    cd backend
    ```
 
-2. Create a `.env` file for local development:
+2. Use the provided development environment file:
+   ```bash
+   ln -s .env.development .env
+   ```
+   
+   Or create a custom `.env` file:
    ```bash
    cat << 'ENV' > .env
    DATABASE_URL=sqlite:///./test.db
-   GCS_BUCKET_NAME=your-local-test-bucket
-   # Required for local testing of uploads, otherwise leave blank or dummy
-   # GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-key.json
+   GCS_BUCKET_NAME=portfolio3-images-bucket
    ADMIN_API_KEY=my_secret_dev_key
    CLERK_SECRET_KEY=sk_test_... # Insert your Clerk Secret Key
    ENV
@@ -62,7 +65,12 @@ The Next.js frontend fetches data from the FastAPI backend.
    ```bash
    bun install
    ```
-3. Set the backend API URL and Clerk keys. Create a `.env.local` file in the root directory:
+3. Use the provided frontend development environment:
+   ```bash
+   ln -s .env.development .env.local
+   ```
+   
+   Or create a custom `.env.local` file:
    ```bash
    cat << 'ENV' > .env.local
    NEXT_PUBLIC_API_URL=http://localhost:8080/api

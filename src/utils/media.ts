@@ -8,8 +8,8 @@ export const getMediaBaseUrl = () => {
 
 export const toMediaUrl = (path: string) => {
   if (!path || isAbsoluteUrl(path)) return path;
-  const base = getMediaBaseUrl();
+
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  if (!base) return normalizedPath;
+  const base = getMediaBaseUrl();
   return `${base}${normalizedPath}`;
 };

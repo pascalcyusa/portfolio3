@@ -1,0 +1,17 @@
+# Bun configuration for Portfolio3
+# This file ensures bun is properly configured for this project
+
+[install]
+# Use bun's fast installer
+production = false
+# Don't create package-lock.json
+lockfile = "bun.lock"
+
+[test]
+# Test configuration (if tests are added later)
+preload = []
+
+# Project metadata
+name = "portfolio3"
+version = "0.1.0"
+description = "Portfolio website with Next.js frontend and FastAPI backend"

@@ -100,9 +100,18 @@ Since you are using Netlify for your Next.js frontend, the deployment is straigh
    - **Build command:** `bun run build`
    - **Publish directory:** `.next`
 5. **Environment Variables:**
-   - Add a new environment variable named `NEXT_PUBLIC_API_URL` and set its value to your Cloud Run URL (e.g., `https://portfolio-backend-xyz.run.app/api`).
-   - Add `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` from your Clerk dashboard.
-   - Add your Google Analytics ID: `NEXT_PUBLIC_GA_ID=your_ga_id`
+   - Use the provided `.env.production` file or create one:
+   ```bash
+   ln -s .env.production .env.local
+   ```
+   - Edit `.env.production` with your actual credentials:
+   ```env
+   NEXT_PUBLIC_API_URL=https://portfolio-backend-xyz.run.app/api
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
+   CLERK_SECRET_KEY=sk_live_...
+   NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+   NEXT_PUBLIC_MEDIA_BASE_URL=https://storage.googleapis.com/your-bucket-name
+   ```
 6. Click **Deploy site**.
 
 ---

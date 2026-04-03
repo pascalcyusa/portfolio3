@@ -197,6 +197,11 @@ gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
     --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
     --role="roles/iam.serviceAccountUser"
 
+# Allow Cloud Build to write logs
+gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
+    --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+    --role="roles/logging.logWriter"
+
 # Allow Cloud Build to sync images to your GCS bucket
 gcloud storage buckets add-iam-policy-binding gs://[YOUR_BUCKET_NAME] \
     --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \

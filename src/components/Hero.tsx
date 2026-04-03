@@ -16,6 +16,7 @@ export default function Hero() {
                     alt="Background"
                     fill
                     priority
+                    sizes="100vw"
                     className="object-cover"
                 />
                 <div className="absolute inset-0 bg-black/50" />
@@ -33,6 +34,7 @@ export default function Hero() {
                                     src={toMediaUrl("/images/profile.jpeg")}
                                     alt="Jean Pascal Cyusa Shyaka"
                                     fill
+                                    sizes="(max-width: 768px) 238px, 383px"
                                     className="object-cover"
                                     priority
                                 />
@@ -43,6 +45,7 @@ export default function Hero() {
                                     src={toMediaUrl("/images/artefacts/10.webp")}
                                     alt="Frame"
                                     fill
+                                    sizes="(max-width: 768px) 280px, 450px"
                                     className="object-fill"
                                 />
                             </div>

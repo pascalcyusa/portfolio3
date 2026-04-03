@@ -1,15 +1,20 @@
 # Portfolio Backend
 
-This is the FastAPI backend for the portfolio, handling database interactions (Neon PostgreSQL) and Google Cloud Storage.
+This is the FastAPI backend for the portfolio, handling database interactions and API endpoints.
 
 ## Local Development
 
-1. Create a `.env` file in the `backend` directory:
+1. Create a `.env` file in the `backend` directory (or use the provided `.env.development`):
    ```env
-   DATABASE_URL=postgresql://user:password@hostname/dbname
-   GCS_BUCKET_NAME=your-bucket-name
-   # Optional: For GCS local authentication without a key file, run:
-   # gcloud auth application-default login
+   DATABASE_URL=sqlite:///./test.db
+   GCS_BUCKET_NAME=portfolio3-images-bucket
+   ADMIN_API_KEY=your-admin-key
+   CLERK_SECRET_KEY=your-clerk-key
+   ```
+
+   For development, you can use the existing `.env.development`:
+   ```bash
+   ln -s .env.development .env
    ```
 
 2. Set up virtual environment and install dependencies:
@@ -21,7 +26,7 @@ This is the FastAPI backend for the portfolio, handling database interactions (N
 
 3. Run the application:
    ```bash
-   uvicorn app.main:app --reload --port 8080
+   uvicorn main:app --reload --port 8080
    ```
 
 4. Seed the database with initial data (make sure the server is running on port 8080):

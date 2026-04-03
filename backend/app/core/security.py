@@ -20,10 +20,9 @@ def get_api_key(credentials: HTTPAuthorizationCredentials = Security(security)):
         # Initialize Clerk SDK
         clerk = Clerk(bearer_auth=settings.CLERK_SECRET_KEY)
 
-        # Verify the token.
-        # In the clerk_backend_api v5, we use verify_token to check the JWT.
+        # Verify the token using the Clerk SDK.
         # This checks the signature using the JWKS for your instance.
-        client = clerk.clients.verify_token(token)
+        client = clerk.clients.verify(request={"token": token})
         if not client:
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED, detail="Invalid token"

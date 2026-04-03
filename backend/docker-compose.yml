@@ -3,11 +3,13 @@ services:
     build: .
     ports:
       - "8080:8080"
+    env_file:
+      - .env
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - GCS_BUCKET_NAME=${GCS_BUCKET_NAME}
       - ADMIN_API_KEY=${ADMIN_API_KEY:-dev_api_key}
     volumes:
-      # Optional: Mount your local gcloud credentials for GCP access
-      # - ~/.config/gcloud:/root/.config/gcloud:ro
       - ./app:/app/app
+      # Share the SQLite database between host and container
+      - ./test.db:/app/test.db

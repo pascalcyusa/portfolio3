@@ -164,3 +164,135 @@ jobs:
 Once the `.github/workflows/deploy.yml` file is saved, commit your changes and push them to your `main` branch. 
 
 Go to the **Actions** tab in your GitHub repository, and you will see your deployment running automatically!
+
+---
+
+# Alternative: Using Google Cloud Build Triggers
+
+If you prefer to keep everything entirely within Google Cloud without configuring Workload Identity Federation in GitHub Actions, you can use **Cloud Build Triggers**.
+
+Google Cloud Build natively monitors your GitHub repository and runs a `cloudbuild.yaml` script whenever you push to a specific branch. Because it runs natively inside your GCP project, authentication is completely seamless!
+
+## Step 1: Connect your GitHub Repository
+1. Go to the [Cloud Build Triggers Console](https://console.cloud.google.com/cloud-build/triggers).
+2. Click **Connect Repository** and follow the prompts to authenticate with GitHub and select your portfolio repository.
+
+## Step 2: Grant the Cloud Build Service Account Permissions
+By default, Cloud Build doesn't have permission to deploy to Cloud Run or modify your Storage Bucket. Let's fix that.
+
+Find your Project Number:
+```bash
+gcloud projects describe $(gcloud config get-value project) --format="value(projectNumber)"
+```
+
+Run these commands (replace `[PROJECT_NUMBER]` and `[YOUR_BUCKET_NAME]`):
+```bash
+# Allow Cloud Build to deploy to Cloud Run
+gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
+    --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+    --role="roles/run.admin"
+
+# Allow Cloud Build to act as the Cloud Run service identity
+gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
+    --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountUser"
+
+# Allow Cloud Build to sync images to your GCS bucket
+gcloud storage buckets add-iam-policy-binding gs://[YOUR_BUCKET_NAME] \
+    --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+    --role="roles/storage.objectAdmin"
+```
+
+## Step 3: Create the `cloudbuild.yaml` file
+At the root of your repository (or inside your backend folder depending on where you want the build to run), create a file named `cloudbuild.yaml` and paste the following:
+
+```yaml
+steps:
+  # Step 1: Sync images to Google Cloud Storage
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ -d "public/images" ]; then
+          gcloud storage cp -r public/images/* gs://$_GCS_BUCKET_NAME/images/
+        else
+          echo "No public/images folder found to upload."
+        fi
+
+  # Step 2: Build and Deploy the backend to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    secretEnv: ['DATABASE_URL', 'ADMIN_API_KEY']
+    args:
+      - 'run'
+      - 'deploy'
+      - 'portfolio-backend'
+      - '--source'
+      - 'backend'          # Change to '.' if cloudbuild.yaml is inside the backend folder
+      - '--region'
+      - '$_GCP_REGION'
+      - '--allow-unauthenticated'
+      - '--set-env-vars'
+      - 'DATABASE_URL=$$DATABASE_URL,GCS_BUCKET_NAME=$_GCS_BUCKET_NAME,ADMIN_API_KEY=$$ADMIN_API_KEY'
+      - '--no-user-output-enabled'
+
+options:
+  # Disable automatic vulnerability scanning for deployed containers to prevent unexpected charges
+  # Cloud Build's "Container Analysis" can cost $0.26 per container scanned if not disabled
+  requestedVerifyOption: 'NOT_VERIFIED'
+  
+substitutions:
+  _GCP_REGION: 'us-east4'
+  _GCS_BUCKET_NAME: 'my-portfolio-images'
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/DATABASE_URL/versions/latest
+      env: 'DATABASE_URL'
+    - versionName: projects/$PROJECT_ID/secrets/ADMIN_API_KEY/versions/latest
+      env: 'ADMIN_API_KEY'
+```
+
+### 3.2 Securely Storing Secrets in Secret Manager
+Instead of storing sensitive keys like your database URL directly in `cloudbuild.yaml` (which anyone can see on GitHub), you must store them in Google Secret Manager.
+
+**1. Enable the Secret Manager API:**
+```bash
+gcloud services enable secretmanager.googleapis.com
+```
+
+**2. Create the secrets:**
+```bash
+echo -n "postgresql://user:pass@host/dbname" | gcloud secrets create DATABASE_URL --data-file=-
+echo -n "your_super_secret_key" | gcloud secrets create ADMIN_API_KEY --data-file=-
+```
+
+**3. Grant Cloud Build permission to read the secrets:**
+Find your Project Number:
+```bash
+gcloud projects describe $(gcloud config get-value project) --format="value(projectNumber)"
+```
+
+Run these commands (replace `[PROJECT_NUMBER]`):
+```bash
+gcloud secrets add-iam-policy-binding DATABASE_URL \
+    --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+    --role="roles/secretmanager.secretAccessor"
+
+gcloud secrets add-iam-policy-binding ADMIN_API_KEY \
+    --member="serviceAccount:[PROJECT_NUMBER]@cloudbuild.gserviceaccount.com" \
+    --role="roles/secretmanager.secretAccessor"
+```
+
+## Step 4: Create the Trigger in Google Cloud Console
+1. Go back to [Cloud Build Triggers Console](https://console.cloud.google.com/cloud-build/triggers).
+2. Click **Create Trigger**.
+3. Name it "deploy-portfolio-backend".
+4. Set the **Event** to **Push to a branch**.
+5. Select your connected GitHub repository. 
+6. Under **Branch**, type `^your-branch-name$` (for example, if your branch is `feat/fastapi`, type `^feat/fastapi$`). *The `^` and `$` symbols are regex characters ensuring exact matches.*
+7. Under **Configuration**, choose **Cloud Build configuration file (yaml or json)**.
+8. Click **Create**.
+
+Now, every time you push to that specific branch, Cloud Build will automatically run the steps defined in your `cloudbuild.yaml`!

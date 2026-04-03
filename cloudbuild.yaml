@@ -1,0 +1,45 @@
+steps:
+  # Step 1: Sync images to Google Cloud Storage
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        if [ -d "public/images" ]; then
+          gcloud storage cp -r public/images/* gs://$_GCS_BUCKET_NAME/images/
+        else
+          echo "No public/images folder found to upload."
+        fi
+
+  # Step 2: Build and Deploy the backend to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "gcloud"
+    secretEnv: ["DATABASE_URL", "ADMIN_API_KEY"]
+    args:
+      - "run"
+      - "deploy"
+      - "portfolio-backend"
+      - "--source"
+      - "." # Change to '.' if cloudbuild.yaml is inside the backend folder
+      - "--region"
+      - "$_GCP_REGION"
+      - "--allow-unauthenticated"
+      - "--set-env-vars"
+      - "DATABASE_URL=$$DATABASE_URL,GCS_BUCKET_NAME=$_GCS_BUCKET_NAME,ADMIN_API_KEY=$$ADMIN_API_KEY"
+      - "--no-user-output-enabled"
+
+options:
+  # Disable automatic vulnerability scanning for deployed containers to prevent unexpected charges
+  # Cloud Build's "Container Analysis" can cost $0.26 per container scanned if not disabled
+  requestedVerifyOption: "NOT_VERIFIED"
+
+substitutions:
+  _GCP_REGION: "us-east4"
+  _GCS_BUCKET_NAME: "my-portfolio-images"
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/DATABASE_URL/versions/latest
+      env: "DATABASE_URL"
+    - versionName: projects/$PROJECT_ID/secrets/ADMIN_API_KEY/versions/latest
+      env: "ADMIN_API_KEY"

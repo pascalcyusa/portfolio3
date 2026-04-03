@@ -16,5 +16,5 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 8080
 
 # Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
 ENV ADMIN_API_KEY=dev_api_key

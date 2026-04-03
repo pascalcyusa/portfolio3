@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   web:
     build: .
@@ -8,9 +6,8 @@ services:
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - GCS_BUCKET_NAME=${GCS_BUCKET_NAME}
-      - GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-key.json
-    volumes:
-      # Optional: Mount your GCP key if you have one locally
-      # - ./gcp-key.json:/app/gcp-key.json
-      - ./app:/app/app
       - ADMIN_API_KEY=${ADMIN_API_KEY:-dev_api_key}
+    volumes:
+      # Optional: Mount your local gcloud credentials for GCP access
+      # - ~/.config/gcloud:/root/.config/gcloud:ro
+      - ./app:/app/app

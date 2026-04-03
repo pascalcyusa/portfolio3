@@ -4,26 +4,26 @@
     "title": "Ultrasonic Anemometer",
     "category": "MEMS / Sensors",
     "lab": "Microscale Sensors and Systems Lab",
-    "image": "/images/tdk-ch101/img1.webp",
+    "image": "https://storage.googleapis.com/portfolio3-images-bucket/images/tdk-ch101/img1.webp",
     "description": "Retrofitting the wind tunnel test section with pressure taps and a pitot-static tube to unlock real-time flow velocity/total pressure data while advancing a miniature ultrasonic anemometer for UAV and Mars applications.",
     "overview": [
       "Retrofitting the wind tunnel test section with differential pressure taps and a pitot-static tube for precise, real-time flow monitoring.",
-      "Developing experimental protocols to push wind velocity accuracy beyond the ±0.05 m/s target set in prior work.",
-      "Tested TDK CH101 ultrasonic sensor anemometer achieving ±0.19 mm distance error and ±0.65 m/s wind velocity error, informing next-phase calibration."
+      "Developing experimental protocols to push wind velocity accuracy beyond the \u00b10.05 m/s target set in prior work.",
+      "Tested TDK CH101 ultrasonic sensor anemometer achieving \u00b10.19 mm distance error and \u00b10.65 m/s wind velocity error, informing next-phase calibration."
     ],
     "period": "Sep 2025 - Present; Jun 2024 - Aug 2024",
     "link": "https://sites.tufts.edu/senselab/research/#:~:text=Miniaturized%20Ultrasonic%20Anemometer",
     "content": "The Microscale Sensors and Systems Lab is a state of the art lab at Tufts that focuses on the design, fabrication, and testing of microscale sensors and systems. My research has area has been on the development of a miniature ultrasonic anemometer using the TDK CH101 sensor. This has potential applications in Navy high-altitude UAVs, and low-pressure environments on Mars.",
     "images": [
       {
-        "url": "/images/tdk-ch101/img1.webp",
+        "url": "https://storage.googleapis.com/portfolio3-images-bucket/images/tdk-ch101/img1.webp",
         "caption": "TDK CH101 Sensor used to measure flow. Here, the sensor is measuring flow at standard room conditions."
       }
     ],
     "achievements": [
       "Wind tunnel instrumentation upgrade with differential pressure taps and pitot-static tube for higher-fidelity measurements.",
-      "Established path to surpass ±0.05 m/s velocity accuracy through improved protocols and calibration routines.",
-      "Built C/LabVIEW data collection and MATLAB/Python analysis pipeline validating ±0.19 mm distance and ±0.65 m/s wind velocity error on TDK CH101 anemometer tests."
+      "Established path to surpass \u00b10.05 m/s velocity accuracy through improved protocols and calibration routines.",
+      "Built C/LabVIEW data collection and MATLAB/Python analysis pipeline validating \u00b10.19 mm distance and \u00b10.65 m/s wind velocity error on TDK CH101 anemometer tests."
     ],
     "pdfUrl": "https://tuftscloud-my.sharepoint.com/:b:/g/personal/jcyusa01_tufts_edu/EQ3-R-EdM6tPplHGKzaGvvkB7qgCPYrTeh75C466yeMHew?e=L1lMAA"
   },
@@ -32,8 +32,8 @@
     "title": "Engineering Education Outreach",
     "category": "Education",
     "lab": "Tufts Center for Engineering Education and Outreach",
-    "image": "/images/ceeo-outreach/img4.webp",
-    "description": "As an Outreach Learning Fellow at Tufts University's Center for Engineering Education and Outreach (CEEO), I’ve had the opportunity to engage with students from underrepresented communities and support their learning in STEM. What excites me most about being an outreach learning fellow is the chance to inspire curiosity and build confidence in young learners through hands-on activities and creative problem-solving.",
+    "image": "https://storage.googleapis.com/portfolio3-images-bucket/images/ceeo-outreach/img4.webp",
+    "description": "As an Outreach Learning Fellow at Tufts University's Center for Engineering Education and Outreach (CEEO), I\u2019ve had the opportunity to engage with students from underrepresented communities and support their learning in STEM. What excites me most about being an outreach learning fellow is the chance to inspire curiosity and build confidence in young learners through hands-on activities and creative problem-solving.",
     "overview": [
       "Designed and tested interactive engineering lessons for outreach programs",
       "Collaborated with local schools to deliver accessible, hands-on STEM education",
@@ -41,13 +41,13 @@
     ],
     "period": "Mar 2023 - Present",
     "link": "https://sites.tufts.edu/ceeoolf/#:~:text=Computer%20Engineering%2C%202027-,Jean%20Pascal%20Cyusa,-Mechanical%20Engineering%2C%202026",
-    "content": "As an Outreach Learning Fellow at Tufts University's Center for Engineering Education and Outreach (CEEO), I’ve had the opportunity to engage with students from underrepresented communities and support their learning in STEM. What excites me most about being an outreach learning fellow is the chance to inspire curiosity and build confidence in young learners through hands-on activities and creative problem-solving.",
+    "content": "As an Outreach Learning Fellow at Tufts University's Center for Engineering Education and Outreach (CEEO), I\u2019ve had the opportunity to engage with students from underrepresented communities and support their learning in STEM. What excites me most about being an outreach learning fellow is the chance to inspire curiosity and build confidence in young learners through hands-on activities and creative problem-solving.",
     "images": [
       {
-        "url": "/images/ceeo-outreach/img1.webp"
+        "url": "https://storage.googleapis.com/portfolio3-images-bucket/images/ceeo-outreach/img1.webp"
       },
       {
-        "url": "/images/ceeo-outreach/img5.webp"
+        "url": "https://storage.googleapis.com/portfolio3-images-bucket/images/ceeo-outreach/img5.webp"
       }
     ],
     "videos": [
@@ -57,7 +57,7 @@
       }
     ],
     "achievements": [
-      "Designed and tested engineering lesson plans for K–12 students",
+      "Designed and tested engineering lesson plans for K\u201312 students",
       "Facilitated hands-on learning activities that introduced core STEM principles",
       "Collaborated with educators and faculty to align outreach goals with DEIJ values"
     ]
@@ -67,7 +67,7 @@
     "title": "Playful Engineering Based Learning (PEBL) Curriculum",
     "category": "Education",
     "lab": "Tufts Center for Engineering Education and Outreach",
-    "image": "/images/ceeo-outreach/img2.webp",
+    "image": "https://storage.googleapis.com/portfolio3-images-bucket/images/ceeo-outreach/img2.webp",
     "description": "Developed comprehensive STEM curricula for K-12 students, focusing on practical engineering applications using LEGO and Arduino projects. Led the implementation of maker spaces across Rwanda, significantly impacting student engagement and learning outcomes.",
     "overview": [
       "Established maker spaces in 20+ Rwandan schools",
@@ -80,11 +80,11 @@
     "content": "Developed comprehensive STEM curricula for K-12 students, focusing on practical engineering applications using LEGO and Arduino projects. Led the implementation of maker spaces across Rwanda, significantly impacting student engagement and learning outcomes.",
     "images": [
       {
-        "url": "/images/ceeo-outreach/img2.webp",
+        "url": "https://storage.googleapis.com/portfolio3-images-bucket/images/ceeo-outreach/img2.webp",
         "caption": "An Arduino robot presented by one of the students in the Makerspace competition at Maranyundo"
       },
       {
-        "url": "/images/ceeo-outreach/img3.webp",
+        "url": "https://storage.googleapis.com/portfolio3-images-bucket/images/ceeo-outreach/img3.webp",
         "caption": "The team that won first place at the Maranyundo Makerspace competition"
       }
     ],

@@ -8,7 +8,7 @@ import os
 router = APIRouter()
 
 # Instantiate a Google Cloud Storage client
-# Requires GOOGLE_APPLICATION_CREDENTIALS to be set in the environment or ADC
+# Uses Application Default Credentials (ADC) or the Cloud Run service account
 storage_client = None
 try:
     storage_client = storage.Client()

@@ -29,7 +29,7 @@ The backend handles API requests, database interactions, and Google Cloud Storag
 
 3. Build and start the backend container:
    ```bash
-   docker-compose up --build -d
+   docker compose up --build -d
    ```
    *The backend is now running at `http://localhost:8080`. You can view the interactive Swagger UI at `http://localhost:8080/api/docs`.*
 
@@ -39,7 +39,7 @@ If you want to populate your local database with your existing portfolio data (P
 
 1. From the root directory, generate the seed files:
    ```bash
-   bun run scripts/seed_generator.ts
+   bun run scripts/seed_generator.js
    ```
 2. Navigate to the backend and run the seed script:
    ```bash
@@ -74,6 +74,6 @@ The Next.js frontend fetches data from the FastAPI backend.
 ---
 
 ## Troubleshooting
-- **Backend fails to start:** Check Docker logs with `docker-compose logs web`.
+- **Backend fails to start:** Check Docker logs with `docker compose logs web`.
 - **Frontend not showing data:** Make sure your backend is running on port 8080 and that you seeded the database. If the database is empty or down, the frontend will automatically fall back to the hardcoded local TypeScript files (`src/data/projects.ts` and `src/data/research.ts`).
 - **Cannot upload images:** Image uploading requires a valid Google Cloud Storage bucket and credentials. If you are just testing UI features locally, you can skip image uploading or mock it.

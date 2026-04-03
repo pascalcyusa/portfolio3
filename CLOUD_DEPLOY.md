@@ -28,10 +28,11 @@ This guide explains how to deploy your portfolio to the cloud, utilizing a moder
    - Go to the bucket's Permissions tab.
    - Click "Grant Access".
    - Add the principal `allUsers` and assign the role `Storage Object Viewer`.
-7. **Service Account Key:**
-   - Go to IAM & Admin > Service Accounts.
-   - Create a new service account with the role `Storage Object Admin`.
-   - Generate a JSON key for this service account and download it. You will need this for the backend to upload files.
+7. **Service Account Permissions (Recommended approach over downloading keys):**
+   - Google recommends avoiding downloading Service Account JSON keys to prevent security risks. 
+   - Instead, we will use Google Cloud's built-in authentication (Application Default Credentials).
+   - For local development, simply run `gcloud auth application-default login` in your terminal. This grants your local environment the necessary permissions to upload to your bucket without needing a downloaded key.
+   - For Cloud Run (production), we will assign the `Storage Object Admin` role to your Cloud Run service's default compute service account in Step 3a.
 
 ---
 
@@ -64,8 +65,26 @@ Cloud Run is perfect for a Dockerized FastAPI app because it scales to zero when
 
 6. **Wait for the deployment to finish.** Cloud Run will provide you with a public URL (e.g., `https://portfolio-backend-xyz.run.app`). Keep this URL handy.
 
-### 3a. Securely providing the Service Account Key
-If you need the FastAPI app to upload files to GCS, you must provide the service account JSON key to Cloud Run. The best way is to use Google Secret Manager. Alternatively, if your Cloud Run service is running in the *same GCP project* as your bucket, you can assign the `Storage Object Admin` role directly to the Cloud Run service's default compute service account, bypassing the need for a JSON key entirely! (This is the recommended approach).
+### 3a. Securely Authenticating to Google Cloud Storage (No JSON Keys Required)
+
+Because downloading Service Account keys poses a security risk if compromised, the modern and most secure way to authenticate your FastAPI app to Google Cloud Storage is to leverage **Application Default Credentials (ADC)**.
+
+**For Local Development:**
+Run the following command in your terminal and log in with your Google account. This securely stores credentials locally without needing a `.json` file:
+```bash
+gcloud auth application-default login
+```
+
+**For Production (Cloud Run):**
+When running on Cloud Run, your app automatically uses the default Compute Engine service account (which looks like `PROJECT_NUMBER-compute@developer.gserviceaccount.com`). 
+
+To allow your Cloud Run service to upload images to your bucket:
+1. Go to the **IAM & Admin > IAM** page in the Google Cloud Console.
+2. Find the principal named **Compute Engine default service account**.
+3. Click the pencil icon to edit its roles.
+4. Add the role **Storage Object Admin** and save.
+
+Your deployed backend will now securely authenticate and upload files to Cloud Storage without ever handling a JSON key!
 
 ---
 

@@ -8,8 +8,8 @@ This is the FastAPI backend for the portfolio, handling database interactions (N
    ```env
    DATABASE_URL=postgresql://user:password@hostname/dbname
    GCS_BUCKET_NAME=your-bucket-name
-   # Optional if running locally and authenticated with gcloud CLI
-   # GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json
+   # Optional: For GCS local authentication without a key file, run:
+   # gcloud auth application-default login
    ```
 
 2. Set up virtual environment and install dependencies:

@@ -14,17 +14,12 @@
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
-        "baseline-browser-mapping": "^2.8.32",
+        "baseline-browser-mapping": "^2.10.13",
         "eslint": "^9",
         "tailwindcss": "^4",
         "typescript": "^5",
       },
     },
-  },
-  "overrides": {
-    "react-server-dom-parcel": "19.2.1",
-    "react-server-dom-turbopack": "19.2.1",
-    "react-server-dom-webpack": "19.2.1",
   },
   "packages": {
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "", {}, ""],
@@ -189,7 +184,7 @@
 
     "balanced-match": ["balanced-match@1.0.2", "", {}, ""],
 
-    "baseline-browser-mapping": ["baseline-browser-mapping@2.8.32", "", { "bin": "dist/cli.js" }, ""],
+    "baseline-browser-mapping": ["baseline-browser-mapping@2.10.13", "", { "bin": { "baseline-browser-mapping": "dist/cli.cjs" } }, "sha512-BL2sTuHOdy0YT1lYieUxTw/QMtPBC3pmlJC6xk8BBYVv6vcw3SGdKemQ+Xsx9ik2F/lYDO9tqsFQH1r9PFuHKw=="],
 
     "brace-expansion": ["brace-expansion@1.1.12", "", { "dependencies": { "balanced-match": "^1.0.0", "concat-map": "0.0.1" } }, ""],
 

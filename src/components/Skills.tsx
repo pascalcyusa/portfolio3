@@ -86,6 +86,7 @@ export default function Skills() {
                                                         src={toMediaUrl((catIndex * 10 + index) % 2 === 0 ? "/images/artefacts/5.webp" : "/images/artefacts/6.webp")}
                                                         alt="Skill Pattern"
                                                         fill
+                                                        sizes="160px"
                                                         className="object-contain opacity-80"
                                                     />
                                                 </div>

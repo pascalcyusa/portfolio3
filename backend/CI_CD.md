@@ -241,6 +241,8 @@ options:
   # Disable automatic vulnerability scanning for deployed containers to prevent unexpected charges
   # Cloud Build's "Container Analysis" can cost $0.26 per container scanned if not disabled
   requestedVerifyOption: 'NOT_VERIFIED'
+  # Required when a custom service account runs the build
+  logging: 'CLOUD_LOGGING_ONLY'
   
 substitutions:
   _GCP_REGION: 'us-east4'

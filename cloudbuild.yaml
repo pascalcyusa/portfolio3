@@ -25,7 +25,18 @@ steps:
       - "$_GCP_REGION"
       - "--allow-unauthenticated"
       - "--set-env-vars"
-      - "DATABASE_URL=$$DATABASE_URL,GCS_BUCKET_NAME=$_GCS_BUCKET_NAME,ADMIN_API_KEY=$$ADMIN_API_KEY"
+      - "DATABASE_URL=$$DATABASE_URL,GCS_BUCKET_NAME=$_GCS_BUCKET_NAME,ADMIN_API_KEY=$$ADMIN_API_KEY,BACKEND_CORS_ORIGINS=$_BACKEND_CORS_ORIGINS,ENVIRONMENT=production"
+      - "--min-instances"
+      - "0"
+      - "--max-instances"
+      - "2"
+      - "--cpu"
+      - "1"
+      - "--memory"
+      - "512Mi"
+      - "--concurrency"
+      - "40"
+      - "--cpu-throttling"
       - "--no-user-output-enabled"
 
 options:
@@ -38,6 +49,7 @@ options:
 substitutions:
   _GCP_REGION: "us-east4"
   _GCS_BUCKET_NAME: "my-portfolio-images"
+  _BACKEND_CORS_ORIGINS: "https://example.netlify.app"
 
 availableSecrets:
   secretManager:

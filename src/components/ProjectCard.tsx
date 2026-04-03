@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { toMediaUrl } from "@/utils/media";
 
 interface ProjectCardProps {
     title: string;
@@ -18,7 +19,7 @@ export default function ProjectCard({ title, subtitle, category, date, image, on
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src={image}
+                    src={toMediaUrl(image)}
                     alt={title}
                     fill
                     priority={false}

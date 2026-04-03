@@ -1,3 +1,4 @@
+from pydantic import model_validator
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
@@ -9,6 +10,12 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
     MAX_UPLOAD_SIZE_MB: int = 10
     ALLOWED_UPLOAD_MIME_TYPES: str = "image/webp,image/jpeg,image/png,image/gif,image/avif,image/svg+xml"
+
+    @model_validator(mode="after")
+    def validate_production_requirements(self):
+        if self.ENVIRONMENT.lower() == "production" and not self.ADMIN_API_KEY:
+            raise ValueError("ADMIN_API_KEY is required when ENVIRONMENT=production")
+        return self
 
     @property
     def cors_origins(self) -> list[str]:

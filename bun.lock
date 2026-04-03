@@ -21,6 +21,11 @@
       },
     },
   },
+  "overrides": {
+    "react-server-dom-parcel": "19.2.1",
+    "react-server-dom-turbopack": "19.2.1",
+    "react-server-dom-webpack": "19.2.1",
+  },
   "packages": {
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "", {}, ""],
 

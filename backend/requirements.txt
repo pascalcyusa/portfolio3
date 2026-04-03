@@ -7,3 +7,4 @@ pydantic-settings
 python-dotenv
 google-cloud-storage
 python-multipart
+clerk-backend-api

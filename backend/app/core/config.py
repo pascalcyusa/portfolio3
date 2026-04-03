@@ -7,14 +7,16 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     GCS_BUCKET_NAME: str
     ADMIN_API_KEY: str | None = None
+    CLERK_SECRET_KEY: str | None = None
+    CLERK_PUBLISHABLE_KEY: str | None = None
     BACKEND_CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
     MAX_UPLOAD_SIZE_MB: int = 10
     ALLOWED_UPLOAD_MIME_TYPES: str = "image/webp,image/jpeg,image/png,image/gif,image/avif,image/svg+xml"
 
     @model_validator(mode="after")
     def validate_production_requirements(self):
-        if self.ENVIRONMENT.lower() == "production" and not self.ADMIN_API_KEY:
-            raise ValueError("ADMIN_API_KEY is required when ENVIRONMENT=production")
+        if self.ENVIRONMENT.lower() == "production" and not self.CLERK_SECRET_KEY:
+            raise ValueError("CLERK_SECRET_KEY is required when ENVIRONMENT=production")
         return self
 
     @property

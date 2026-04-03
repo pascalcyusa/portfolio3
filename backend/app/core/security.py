@@ -1,20 +1,36 @@
-from fastapi import Security, HTTPException
-from fastapi.security import APIKeyHeader
-from starlette.status import HTTP_403_FORBIDDEN
-import secrets
+from fastapi import Security, HTTPException, Request
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from starlette.status import HTTP_403_FORBIDDEN, HTTP_401_UNAUTHORIZED
 from app.core.config import settings
+from clerk_backend_api import Clerk
 
-API_KEY_NAME = "X-API-Key"
-api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
+security = HTTPBearer()
 
-def get_api_key(api_key_header: str = Security(api_key_header)):
-    expected_api_key = settings.ADMIN_API_KEY
-    if not expected_api_key:
+def get_api_key(credentials: HTTPAuthorizationCredentials = Security(security)):
+    """
+    Validates a Clerk JWT token sent in the Authorization header as a Bearer token.
+    """
+    if not settings.CLERK_SECRET_KEY:
         raise HTTPException(
-            status_code=HTTP_403_FORBIDDEN, detail="Admin API key is not configured"
+            status_code=HTTP_403_FORBIDDEN, detail="Clerk Secret Key is not configured"
         )
-    if api_key_header and secrets.compare_digest(api_key_header, expected_api_key):
-        return api_key_header
-    raise HTTPException(
-        status_code=HTTP_403_FORBIDDEN, detail="Could not validate credentials"
-    )
+
+    token = credentials.credentials
+    try:
+        # Initialize Clerk SDK
+        clerk = Clerk(bearer_auth=settings.CLERK_SECRET_KEY)
+
+        # Verify the token.
+        # In the clerk_backend_api v5, we use verify_token to check the JWT.
+        # This checks the signature using the JWKS for your instance.
+        client = clerk.clients.verify_token(token)
+        if not client:
+            raise HTTPException(
+                status_code=HTTP_401_UNAUTHORIZED, detail="Invalid token"
+            )
+        return token
+    except Exception as e:
+        print(f"Auth error: {e}")
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED, detail="Could not validate credentials"
+        )

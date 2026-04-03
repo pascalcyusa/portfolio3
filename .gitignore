@@ -80,3 +80,6 @@ test.db
 
 # Verification
 verification_script.py
+
+# clerk configuration (can include secrets)
+/.clerk/

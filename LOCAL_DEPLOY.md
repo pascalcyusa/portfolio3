@@ -24,6 +24,7 @@ The backend handles API requests, database interactions, and Google Cloud Storag
    # Required for local testing of uploads, otherwise leave blank or dummy
    # GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-key.json
    ADMIN_API_KEY=my_secret_dev_key
+   CLERK_SECRET_KEY=sk_test_... # Insert your Clerk Secret Key
    ENV
    ```
 
@@ -61,9 +62,13 @@ The Next.js frontend fetches data from the FastAPI backend.
    ```bash
    bun install
    ```
-3. Set the backend API URL. Create a `.env.local` file in the root directory:
+3. Set the backend API URL and Clerk keys. Create a `.env.local` file in the root directory:
    ```bash
-   echo "NEXT_PUBLIC_API_URL=http://localhost:8080/api" > .env.local
+   cat << 'ENV' > .env.local
+   NEXT_PUBLIC_API_URL=http://localhost:8080/api
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+   CLERK_SECRET_KEY=sk_test_...
+   ENV
    ```
 4. Start the development server:
    ```bash

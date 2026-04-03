@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import FooterWrapper from "@/components/FooterWrapper";
 import Analytics from "@/components/Analytics";
+import { ClerkProvider } from '@clerk/nextjs'
 
 const syne = Syne({
   variable: "--font-syne",
@@ -31,11 +32,12 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${syne.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground font-sans`}
-      >
-        {/* Google tag (gtag.js) */}
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${syne.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground font-sans`}
+        >
+          {/* Google tag (gtag.js) */}
         {gaId && (
           <>
             <Script
@@ -54,9 +56,10 @@ export default function RootLayout({
           </>
         )}
         <Navbar />
-        {children}
-        <FooterWrapper />
-      </body>
-    </html>
+          {children}
+          <FooterWrapper />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

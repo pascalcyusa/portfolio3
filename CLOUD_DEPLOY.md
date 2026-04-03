@@ -59,9 +59,9 @@ Cloud Run is perfect for a Dockerized FastAPI app because it scales to zero when
      --source . \
      --region us-central1 \
      --allow-unauthenticated \
-     --set-env-vars="DATABASE_URL=your_neon_db_url,GCS_BUCKET_NAME=your_gcs_bucket_name,ADMIN_API_KEY=your_secure_random_key"
+     --set-env-vars="DATABASE_URL=your_neon_db_url,GCS_BUCKET_NAME=your_gcs_bucket_name,ADMIN_API_KEY=your_secure_random_key,CLERK_SECRET_KEY=sk_test_..."
    ```
-   *Note:* Replace `your_neon_db_url` with your Neon connection string, `your_gcs_bucket_name` with your bucket name, and `your_secure_random_key` with a long, unguessable string.
+   *Note:* Replace `your_neon_db_url` with your Neon connection string, `your_gcs_bucket_name` with your bucket name, `your_secure_random_key` with a long, unguessable string, and your `CLERK_SECRET_KEY` from your Clerk dashboard.
 
 6. **Wait for the deployment to finish.** Cloud Run will provide you with a public URL (e.g., `https://portfolio-backend-xyz.run.app`). Keep this URL handy.
 
@@ -101,6 +101,7 @@ Since you are using Netlify for your Next.js frontend, the deployment is straigh
    - **Publish directory:** `.next`
 5. **Environment Variables:**
    - Add a new environment variable named `NEXT_PUBLIC_API_URL` and set its value to your Cloud Run URL (e.g., `https://portfolio-backend-xyz.run.app/api`).
+   - Add `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` from your Clerk dashboard.
    - Add your Google Analytics ID: `NEXT_PUBLIC_GA_ID=your_ga_id`
 6. Click **Deploy site**.
 

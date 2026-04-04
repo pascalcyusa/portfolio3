@@ -1,5 +1,5 @@
 steps:
-  # Step 1: Sync images to Google Cloud Storage
+  # Step 1: Sync images to Google Cloud Storage (if any exist locally)
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: "bash"
     args:
@@ -8,24 +8,24 @@ steps:
         if [ -d "public/images" ]; then
           gcloud storage cp -r public/images/* gs://$_GCS_BUCKET_NAME/images/
         else
-          echo "No public/images folder found to upload."
+          echo "No public/images folder found to upload (expected — images are already in GCS)."
         fi
 
   # Step 2: Build and Deploy the backend to Cloud Run
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: "gcloud"
-    secretEnv: ["DATABASE_URL", "ADMIN_API_KEY"]
+    secretEnv: ["DATABASE_URL", "ADMIN_API_KEY", "CLERK_SECRET_KEY", "CLERK_PUBLISHABLE_KEY"]
     args:
       - "run"
       - "deploy"
       - "portfolio-backend"
       - "--source"
-      - "." # Change to '.' if cloudbuild.yaml is inside the backend folder
+      - "./backend"
       - "--region"
       - "$_GCP_REGION"
       - "--allow-unauthenticated"
       - "--set-env-vars"
-      - "DATABASE_URL=$$DATABASE_URL,GCS_BUCKET_NAME=$_GCS_BUCKET_NAME,ADMIN_API_KEY=$$ADMIN_API_KEY,BACKEND_CORS_ORIGINS=$_BACKEND_CORS_ORIGINS,ENVIRONMENT=production"
+      - "DATABASE_URL=$$DATABASE_URL,GCS_BUCKET_NAME=$_GCS_BUCKET_NAME,ADMIN_API_KEY=$$ADMIN_API_KEY,BACKEND_CORS_ORIGINS=$_BACKEND_CORS_ORIGINS,ENVIRONMENT=production,CLERK_SECRET_KEY=$$CLERK_SECRET_KEY,CLERK_PUBLISHABLE_KEY=$$CLERK_PUBLISHABLE_KEY"
       - "--min-instances"
       - "0"
       - "--max-instances"
@@ -37,19 +37,15 @@ steps:
       - "--concurrency"
       - "40"
       - "--cpu-throttling"
-      - "--no-user-output-enabled"
 
 options:
-  # Disable automatic vulnerability scanning for deployed containers to prevent unexpected charges
-  # Cloud Build's "Container Analysis" can cost $0.26 per container scanned if not disabled
   requestedVerifyOption: "NOT_VERIFIED"
-  # Required when a custom service account runs the build
   logging: "CLOUD_LOGGING_ONLY"
 
 substitutions:
   _GCP_REGION: "us-east4"
-  _GCS_BUCKET_NAME: "my-portfolio-images"
-  _BACKEND_CORS_ORIGINS: "https://example.netlify.app"
+  _GCS_BUCKET_NAME: "portfolio3-images-bucket"
+  _BACKEND_CORS_ORIGINS: "https://pascalcyusa.com,https://www.pascalcyusa.com,https://portfolio3-pascal.netlify.app"
 
 availableSecrets:
   secretManager:
@@ -57,3 +53,7 @@ availableSecrets:
       env: "DATABASE_URL"
     - versionName: projects/$PROJECT_ID/secrets/ADMIN_API_KEY/versions/latest
       env: "ADMIN_API_KEY"
+    - versionName: projects/$PROJECT_ID/secrets/CLERK_SECRET_KEY/versions/latest
+      env: "CLERK_SECRET_KEY"
+    - versionName: projects/$PROJECT_ID/secrets/CLERK_PUBLISHABLE_KEY/versions/latest
+      env: "CLERK_PUBLISHABLE_KEY"

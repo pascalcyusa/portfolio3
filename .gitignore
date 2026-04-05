@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# same as portfolio2
-portfolio2/
+TODO.md
 
 # dependencies
 /node_modules

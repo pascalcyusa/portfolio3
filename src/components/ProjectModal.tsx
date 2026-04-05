@@ -211,11 +211,14 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                                         allowFullScreen
                                     />
                                 ) : (
-                                    <div className="flex items-center justify-center h-full text-white">
-                                        <div className="text-center">
-                                            <p className="mb-2">Click to View Video</p>
-                                        </div>
-                                    </div>
+                                    <video
+                                        src={toMediaUrl(currentMedia.url)}
+                                        className="w-full h-full object-cover"
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                    />
                                 )}
                             </div>
                         )}
@@ -402,9 +405,12 @@ export default function ProjectModal({ project, onClose, onNext, onPrev }: Proje
                                         allowFullScreen
                                     />
                                 ) : (
-                                    <div className="flex items-center justify-center h-full text-white">
-                                        <a href={currentMedia.url} target="_blank" className="text-2xl underline hover:text-brand-orange">Watch on External Site</a>
-                                    </div>
+                                    <video
+                                        src={toMediaUrl(currentMedia.url)}
+                                        className="w-full h-full"
+                                        controls
+                                        autoPlay
+                                    />
                                 )}
                             </div>
                         )}

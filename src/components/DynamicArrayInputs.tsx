@@ -307,7 +307,7 @@ export function DynamicVideoArrayInput({ label, items, onChange, onUploadClick }
                 type="text"
                 value={newUrl}
                 onChange={(e) => setNewUrl(e.target.value)}
-                placeholder="Video URL"
+                placeholder="Video URL (e.g., YouTube link or upload MP4)"
                 className="flex-1 bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange"
               />
                <button

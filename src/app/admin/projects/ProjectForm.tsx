@@ -180,10 +180,10 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
             <input type="text" name="github_url" value={formData.github_url} onChange={handleChange} className="w-full bg-gray-800 border border-gray-700 rounded p-2 text-white" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">PDF URL</label>
-            <div className="flex gap-2">
-               <input type="text" name="pdf_url" value={formData.pdf_url} onChange={handleChange} className="flex-1 bg-gray-800 border border-gray-700 rounded p-2 text-white" />
-               <button type="button" onClick={() => handleUploadClick("pdf_url")} className="bg-gray-700 px-4 py-2 rounded text-sm">Upload</button>
+            <label className="block text-sm font-medium text-gray-400 mb-1">PDF URL (Paste external link or upload)</label>
+            <div className="flex gap-2 mb-6">
+               <input type="text" name="pdf_url" value={formData.pdf_url} onChange={handleChange} placeholder="https://..." className="flex-1 bg-gray-800 border border-gray-700 rounded p-2 text-white" />
+               <button type="button" onClick={() => handleUploadClick("pdf_url")} className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-sm transition-colors text-white">Upload</button>
             </div>
           </div>
         </div>

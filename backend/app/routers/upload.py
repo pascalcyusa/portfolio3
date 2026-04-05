@@ -1,9 +1,10 @@
-from fastapi import APIRouter, File, UploadFile, HTTPException, Depends
+from fastapi import APIRouter, File, UploadFile, HTTPException, Depends, Form
 from google.cloud import storage
 from app.core.config import settings
 from app.core.security import get_api_key
 import uuid
 import os
+import re
 
 router = APIRouter()
 
@@ -16,7 +17,10 @@ except Exception as e:
     print(f"Warning: Could not initialize Google Cloud Storage client: {e}")
 
 @router.post("/upload", dependencies=[Depends(get_api_key)])
-async def upload_file(file: UploadFile = File(...)):
+async def upload_file(
+    file: UploadFile = File(...),
+    folder_id: str = Form(None)
+):
     if not storage_client:
         raise HTTPException(status_code=500, detail="Google Cloud Storage client not configured")
 
@@ -30,7 +34,13 @@ async def upload_file(file: UploadFile = File(...)):
 
     # Create a unique filename
     ext = os.path.splitext(file.filename)[1]
+    
     unique_filename = f"{uuid.uuid4()}{ext}"
+    if folder_id:
+        # Sanitize folder_id to alphanumeric and hyphens/underscores to prevent path traversal
+        clean_folder = re.sub(r'[^a-zA-Z0-9_-]', '', folder_id)
+        if clean_folder:
+            unique_filename = f"{clean_folder}/{unique_filename}"
 
     # Read the file contents
     contents = await file.read()

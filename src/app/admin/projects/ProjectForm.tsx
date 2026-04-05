@@ -31,6 +31,11 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
   const { getToken } = useAuth();
 
   const handleUploadClick = async (field: "image" | "pdf_url" | "images" | "videos", index: number | null = null) => {
+    if (!formData.id) {
+      alert("Please enter a Project ID first to keep uploads organized.");
+      return;
+    }
+
     const input = document.createElement("input");
     input.type = "file";
     input.accept = field === "pdf_url" ? "application/pdf" : field === "videos" ? "video/*" : "image/*";
@@ -44,6 +49,7 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
 
         const fd = new FormData();
         fd.append("file", file);
+        fd.append("folder_id", formData.id);
 
         const res = await fetch(`${apiUrl}/upload`, {
           method: "POST",

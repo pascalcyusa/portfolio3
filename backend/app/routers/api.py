@@ -43,10 +43,11 @@ def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
 def delete_project(project_id: str, db: Session = Depends(get_db)):
     db_project = db.query(Project).filter(Project.id == project_id).first()
     if not db_project:
-        raise HTTPException(status_code=404, detail="Project not found")
+        # Improved error for easier debugging
+        raise HTTPException(status_code=404, detail=f"Project with ID '{project_id}' not found in database.")
     db.delete(db_project)
     db.commit()
-    return {"message": "Project deleted successfully"}
+    return {"message": f"Project '{project_id}' deleted successfully"}
 
 
 # Research
@@ -76,10 +77,10 @@ def create_research(research: ResearchCreate, db: Session = Depends(get_db)):
 def delete_research(research_id: str, db: Session = Depends(get_db)):
     db_research = db.query(Research).filter(Research.id == research_id).first()
     if not db_research:
-        raise HTTPException(status_code=404, detail="Research not found")
+        raise HTTPException(status_code=404, detail=f"Research item with ID '{research_id}' not found in database.")
     db.delete(db_research)
     db.commit()
-    return {"message": "Research deleted successfully"}
+    return {"message": f"Research '{research_id}' deleted successfully"}
 
 # Experiences
 @router.get("/experiences", response_model=List[ExperienceResponse])

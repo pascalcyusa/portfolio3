@@ -40,7 +40,8 @@ async def upload_file(
         # Sanitize folder_id to alphanumeric and hyphens/underscores to prevent path traversal
         clean_folder = re.sub(r'[^a-zA-Z0-9_-]', '', folder_id)
         if clean_folder:
-            unique_filename = f"{clean_folder}/{unique_filename}"
+            # Group all uploads for projects under a top-level 'images' directory
+            unique_filename = f"images/{clean_folder}/{unique_filename}"
 
     # Read the file contents
     contents = await file.read()

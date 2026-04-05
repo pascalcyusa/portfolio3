@@ -1,82 +1,48 @@
 # Local Deployment Guide
 
-This guide explains how to run the full portfolio stack locally. The stack consists of a Dockerized FastAPI backend (connected to a local SQLite database for development) and a Next.js frontend running via Bun.
+This guide explains how to run the full portfolio stack locally. 
 
 ## Prerequisites
-- [Docker](https://www.docker.com/) and Docker Compose installed.
-- [Bun](https://bun.sh/) installed.
-- (Optional) [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) if you want to test Google Cloud Storage uploads locally.
+- [Bun](https://bun.sh/) installed (for Frontend).
+- [Python 3.11+](https://www.python.org/) installed (for Backend).
+- (Optional) [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) if you want to upload artifacts to Google Cloud Storage.
 
-## Step 1: Start the Backend (Docker)
+## Step 1: Start the Backend
 
-The backend handles API requests, database interactions, and Google Cloud Storage uploads. We will run it using Docker Compose.
+The backend handles API requests, database interactions, and Google Cloud Storage uploads. We will run it natively using Python.
 
 1. Navigate to the `backend` directory:
    ```bash
    cd backend
    ```
 
-2. Use the provided development environment file:
+2. Link the development environment:
    ```bash
-   ln -s .env.development .env
+   ln -f -s .env.development .env
    ```
-   
-   Or create a custom `.env` file:
-   ```bash
-   cat << 'ENV' > .env
-   DATABASE_URL=sqlite:///./test.db
-   GCS_BUCKET_NAME=portfolio3-images-bucket
-   ADMIN_API_KEY=my_secret_dev_key
-   CLERK_SECRET_KEY=sk_test_... # Insert your Clerk Secret Key
-   ENV
-   ```
+   *(This ensures you connect to the local SQLite database `test.db` instead of the production Postgres DB).*
 
-3. Build and start the backend container:
+3. Set up your Python environment and start the server:
    ```bash
-   docker compose up --build -d
-   ```
-   *The backend is now running at `http://localhost:8080`. You can view the interactive Swagger UI at `http://localhost:8080/api/docs`.*
-
-## Step 2: Seed the Database (Optional)
-
-If you want to populate your local database with your existing portfolio data (Projects and Research):
-
-1. From the root directory, generate the seed files:
-   ```bash
-   bun run scripts/seed_generator.js
-   ```
-2. Navigate to the backend and run the seed script:
-   ```bash
-   cd backend
-   # You must have Python installed locally to run this script easily, or run it inside the docker container
    python3 -m venv venv
    source venv/bin/activate
-   pip install requests
-   export ADMIN_API_KEY=my_secret_dev_key
-   python seed.py
+   pip install -r requirements.txt
+   uvicorn main:app --reload --port 8080
    ```
+   *The backend is now running at `http://localhost:8080`. You can view the interactive Swagger UI at `http://localhost:8080/docs`.*
 
-## Step 3: Start the Frontend (Bun)
+## Step 2: Start the Frontend
 
 The Next.js frontend fetches data from the FastAPI backend.
 
-1. Navigate back to the root directory (if you aren't already there).
+1. Navigate back to the root directory.
 2. Install dependencies using Bun:
    ```bash
    bun install
    ```
 3. Use the provided frontend development environment:
    ```bash
-   ln -s .env.development .env.local
-   ```
-   
-   Or create a custom `.env.local` file:
-   ```bash
-   cat << 'ENV' > .env.local
-   NEXT_PUBLIC_API_URL=http://localhost:8080/api
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-   CLERK_SECRET_KEY=sk_test_...
-   ENV
+   ln -f -s .env.development .env.local
    ```
 4. Start the development server:
    ```bash
@@ -87,6 +53,5 @@ The Next.js frontend fetches data from the FastAPI backend.
 ---
 
 ## Troubleshooting
-- **Backend fails to start:** Check Docker logs with `docker compose logs web`.
-- **Frontend not showing data:** Make sure your backend is running on port 8080 and that you seeded the database. If the database is empty or down, the frontend will automatically fall back to the hardcoded local TypeScript files (`src/data/projects.ts` and `src/data/research.ts`).
-- **Cannot upload images:** Image uploading requires a valid Google Cloud Storage bucket and credentials. If you are just testing UI features locally, you can skip image uploading or mock it.
+- **Frontend not showing data:** Make sure your backend is running on port `8080`. If you just started fresh, you can create a test project via the `/admin` portal (once signed in) to initialize data in your SQLite DB.
+- **Cannot upload images:** Image uploading directly integrates with GCS. It requires you to have Google Application Default Credentials authenticated on your machine (`gcloud auth application-default login`). If you skip this, image uploads locally will fail but viewing text data still works perfectly.

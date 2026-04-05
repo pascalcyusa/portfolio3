@@ -4,7 +4,7 @@ import { PlusCircle, Pencil, Trash2 } from "lucide-react";
 import DeleteProjectButton from "./DeleteProjectButton";
 
 export default async function AdminProjectsPage() {
-  const projects = await fetchProjects();
+  const projects = await fetchProjects({ noCache: true });
 
   return (
     <div className="max-w-5xl">

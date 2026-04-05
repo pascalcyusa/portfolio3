@@ -4,7 +4,7 @@ import { PlusCircle, Pencil } from "lucide-react";
 import DeleteResearchButton from "./DeleteResearchButton";
 
 export default async function AdminResearchPage() {
-  const research = await fetchResearch();
+  const research = await fetchResearch({ noCache: true });
 
   return (
     <div className="max-w-5xl">

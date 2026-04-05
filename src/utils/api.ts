@@ -2,11 +2,13 @@ export const getApiUrl = () => {
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
 };
 
-export const fetchProjects = async () => {
+export const fetchProjects = async (options: { noCache?: boolean } = {}) => {
   try {
-    const res = await fetch(`${getApiUrl()}/projects`, {
-      next: { revalidate: 300 } // Revalidate every 5 minutes to reduce backend/GCP cost
-    });
+    const fetchOptions: RequestInit = options.noCache
+      ? { cache: 'no-store' }
+      : { next: { revalidate: 300 } };
+
+    const res = await fetch(`${getApiUrl()}/projects`, fetchOptions);
     if (!res.ok) {
       throw new Error(`Failed to fetch projects: ${res.statusText}`);
     }
@@ -17,11 +19,13 @@ export const fetchProjects = async () => {
   }
 };
 
-export const fetchResearch = async () => {
+export const fetchResearch = async (options: { noCache?: boolean } = {}) => {
   try {
-    const res = await fetch(`${getApiUrl()}/research`, {
-      next: { revalidate: 300 }
-    });
+    const fetchOptions: RequestInit = options.noCache
+      ? { cache: 'no-store' }
+      : { next: { revalidate: 300 } };
+
+    const res = await fetch(`${getApiUrl()}/research`, fetchOptions);
     if (!res.ok) {
       throw new Error(`Failed to fetch research: ${res.statusText}`);
     }
